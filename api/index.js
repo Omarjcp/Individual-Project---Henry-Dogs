@@ -19,10 +19,20 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
+const { Raza, Temperamento } = require('./src/db.js')
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
   server.listen(3001, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
+
+          var temperamento = Temperamento.create({
+            name: "rabioso"
+          })
+          
+          Promise.all([temperamento])
+            .then(res => {
+              console.log("temperamento temperamento");
+            });
   });
 });

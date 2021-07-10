@@ -9,21 +9,21 @@ module.exports = (sequelize) => {
         allowNull: false,
         primaryKey: true
     },
-    nombre: {
+    name: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
     },
-    altura: {
-        type: DataTypes.INTEGER,
+    height: {
+        type: DataTypes.STRING,
         allowNull: false,
     },
-    peso: {
-        type: DataTypes.INTEGER,
+    weight: {
+        type: DataTypes.STRING,
         allowNull: false,
     },
-    esperanzaDeVida: {
-        type: DataTypes.INTEGER,
+    life_span: {
+        type: DataTypes.STRING,
     }
   });
 };
