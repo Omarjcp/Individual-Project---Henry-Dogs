@@ -23,16 +23,12 @@ const { Raza, Temperamento } = require('./src/db.js')
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(3001, () => {
+  server.listen(3001, async () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
 
-          var temperamento = Temperamento.create({
+          var temperamento = await Temperamento.create({
             name: "rabioso"
           })
-          
-          Promise.all([temperamento])
-            .then(res => {
-              console.log("temperamento temperamento");
-            });
+         
   });
 });

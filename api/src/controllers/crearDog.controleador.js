@@ -6,14 +6,19 @@ async function crearRaza(req, res) {
     try{
         const { name, height, weight, life_span, temperament } = req.body
         //crea raza en DB
+        const temperamento = await Temperamento.create({
+            name: temperament
+        })
         const raza = await Raza.create({
+            id: name,
             name,
             height,
             weight,
             life_span
         })
+ 
+        await raza.setTemperamentos(temperamento)
 
-        await raza.setTemperamentos(temperament)
 
         if(raza){
             return res.json({
@@ -28,6 +33,4 @@ async function crearRaza(req, res) {
 }
 
 
-module.exports = {
-    crearRaza,
-}
+module.exports = crearRaza
