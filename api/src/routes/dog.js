@@ -3,7 +3,7 @@ const router = Router();
 
 const crearRaza = require('../controllers/crearDog.controleador.js')
 
-// Configurar los routers 'dogs'
+// Configurar los routers 'dog'
 router.post('/', crearRaza)
 
 

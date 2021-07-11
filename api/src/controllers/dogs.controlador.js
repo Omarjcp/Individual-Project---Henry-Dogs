@@ -1,6 +1,6 @@
 const axios = require('axios')
 const { Raza, Temperamento } = require('../db.js')
-const { obtenerTodasLasRazas, obtenerDetalleDeRazas } = require('./funciones/razasPrincipal.js')
+const { obtenerPrincipalRazas, obtenerDetalleDeRazas } = require('./funciones/razasPrincipal.js')
 
 
 //8 primeras razas de db y api
@@ -8,7 +8,7 @@ async function obtenerRazas(req, res) {
     try{
         let { name } = req.query
         //todas las razas api & db
-        let todasRazas = await obtenerTodasLasRazas()
+        let todasRazas = await obtenerPrincipalRazas()
 
         //si existe la query
         if(name) {

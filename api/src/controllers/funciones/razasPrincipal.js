@@ -2,7 +2,7 @@ const axios = require('axios')
 const { Raza, Temperamento } = require('../../db.js')
 
 //obtener todas las razas para la ruta principal
-async function obtenerTodasLasRazas() {
+async function obtenerPrincipalRazas() {
     let { data } = await axios(`https://api.thedogapi.com/v1/breeds`)
 
     //solicitud a DB
@@ -55,6 +55,6 @@ async function obtenerDetalleDeRazas() {
 
 
 module.exports = {
-    obtenerTodasLasRazas,
+    obtenerPrincipalRazas,
     obtenerDetalleDeRazas,
 }
