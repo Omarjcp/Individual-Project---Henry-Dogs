@@ -7,6 +7,7 @@ const { obtenerPrincipalRazas, obtenerDetalleDeRazas } = require('./funciones/ra
 async function obtenerRazas(req, res) {
     try{
         let { name } = req.query
+        let { pag } = req.query
         //todas las razas api & db
         let todasRazas = await obtenerPrincipalRazas()
 
@@ -30,6 +31,13 @@ async function obtenerRazas(req, res) {
             }
         }
 
+        if(pag) {
+            let desde = Number(pag) * 8
+            let hasta = desde + 8
+            let siguientesOcho = todasRazas.slice(desde, hasta)
+            return res.json(siguientesOcho)
+        }
+
         //las 8 primeras razas del total
         let primerosOcho = todasRazas.slice(0, 8)
 
@@ -37,6 +45,7 @@ async function obtenerRazas(req, res) {
         if(primerosOcho){
             return res.json(primerosOcho)
         }
+
 
     }
     catch(err){
