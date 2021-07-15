@@ -20,10 +20,25 @@ async function obtenerRazas(req, res) {
         if (raza.name.toLowerCase().includes(name.toLowerCase())) return raza;
       });
 
+      let longitudRazasFiltradas = razasFiltradas.length;
+
       //si existe algo en el array filtrado, lo muestra
       if (razasFiltradas.length > 0) {
+        if (pag) {
+          let desde = Number(pag) * 8;
+          let hasta = desde + 8;
+          let siguientesOcho = await razasFiltradas.slice(desde, hasta);
+          return res.json({
+            data: siguientesOcho,
+            longitud: longitudRazasFiltradas,
+          });
+        }
+
         let primerosOcho = await razasFiltradas.slice(0, 8);
-        res.json(primerosOcho);
+        res.json({
+          data: primerosOcho,
+          longitud: longitudRazasFiltradas,
+        });
       }
       //si el array esta vacio, error
       else {
@@ -32,6 +47,8 @@ async function obtenerRazas(req, res) {
         });
       }
     }
+
+    let longitudTodasRazas = todasRazas.length;
 
     if (pag) {
       let desde = Number(pag) * 8;
@@ -45,7 +62,10 @@ async function obtenerRazas(req, res) {
 
     // miestra las razas
     if (primerosOcho) {
-      return res.json(primerosOcho);
+      return res.json({
+        data: primerosOcho,
+        longitud: longitudTodasRazas,
+      });
     }
   } catch (err) {
     console.log(err);
