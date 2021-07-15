@@ -2,12 +2,12 @@ import { obtenerPorId } from "../../redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Navbar } from "../navbar";
 
 export const Detalle = () => {
   let { id } = useParams();
   const dispatch = useDispatch();
   const { razaId } = useSelector((state) => state);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     dispatch(obtenerPorId(id));
@@ -15,6 +15,7 @@ export const Detalle = () => {
 
   return (
     <div>
+      <Navbar />
       <div
         style={{
           display: "flex",
@@ -23,6 +24,7 @@ export const Detalle = () => {
           border: "1px solid black",
           width: "15rem",
           paddingBottom: "10px",
+          marginTop: "5rem",
         }}
       >
         <div>

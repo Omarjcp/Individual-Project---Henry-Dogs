@@ -9,7 +9,6 @@ import {
 
 const estadoInicial = {
   razas: [],
-  razasPag: [],
   razasNomb: [],
   temperamentos: [],
   razaId: {},
@@ -20,13 +19,21 @@ export default function rootReducer(state = estadoInicial, action) {
     case OBTENER_RAZAS:
       return {
         ...state,
-        razas: [...action.payload],
+        razas: action.payload.data,
+        longitud: action.payload.longitud,
       };
 
     case OBTENER_POR_PAG:
       return {
         ...state,
         razas: action.payload,
+      };
+
+    case OBTENER_POR_NOMBRE:
+      return {
+        ...state,
+        razas: action.payload.data,
+        longitud: action.payload.longitud,
       };
 
     case OBTENER_POR_ID:

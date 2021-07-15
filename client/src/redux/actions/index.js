@@ -11,7 +11,20 @@ export function obtenerRazas() {
   return async function (dispatch) {
     try {
       const { data } = await axios("http://localhost:3001/dogs");
+      // console.log("---------", data);
       return dispatch({ type: OBTENER_RAZAS, payload: data });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+
+export function obtenerPorPag(pag) {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios("http://localhost:3001/dogs?pag=" + pag);
+      // console.log("----------", data);
+      return dispatch({ type: OBTENER_POR_PAG, payload: data });
     } catch (err) {
       console.log(err);
     }
@@ -41,24 +54,14 @@ export function obtenerTemperamentos() {
   };
 }
 
-export function obtenerPorPag(pag) {
+export function obtenerPorNombre(nombre, pag) {
   return async function (dispatch) {
     try {
-      const razasPag = await axios("http://localhost:3001/dogs?pag=" + pag);
-      return dispatch({ type: OBTENER_POR_PAG, payload: razasPag });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-}
-
-export function obtenerPorNombre(nombre) {
-  return async function (dispatch) {
-    try {
-      const razasNomb = await axios(
-        "http://localhost:3001/dogs?name=" + nombre
+      const { data } = await axios(
+        "http://localhost:3001/dogs?name=" + nombre + "&pag=" + pag
       );
-      return dispatch({ type: OBTENER_POR_NOMBRE, payload: razasNomb });
+      console.log("-----------------name", data);
+      return dispatch({ type: OBTENER_POR_NOMBRE, payload: data });
     } catch (err) {
       console.log(err);
     }
