@@ -1,21 +1,26 @@
 import { obtenerPorId } from "../../redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { Navbar } from "../navbar";
 
 export const Detalle = () => {
   let { id } = useParams();
+  const history = useHistory();
   const dispatch = useDispatch();
   const { razaId } = useSelector((state) => state);
 
   useEffect(() => {
     dispatch(obtenerPorId(id));
-  }, []);
+  }, [id]);
+
+  function regresar() {
+    history.replace("/principal");
+  }
 
   return (
     <div>
-      <Navbar />
+      <Navbar path={regresar} />
       <div
         style={{
           display: "flex",

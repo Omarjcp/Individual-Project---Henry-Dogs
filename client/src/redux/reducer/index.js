@@ -4,14 +4,15 @@ import {
   OBTENER_POR_ID,
   OBTENER_POR_NOMBRE,
   OBTENER_POR_PAG,
+  OBTENER_PARA_ORDENAR,
   CREAR_RAZA,
 } from "../actions/index";
 
 const estadoInicial = {
   razas: [],
-  razasNomb: [],
   temperamentos: [],
   razaId: {},
+  busqueda: "",
 };
 
 export default function rootReducer(state = estadoInicial, action) {
@@ -26,10 +27,19 @@ export default function rootReducer(state = estadoInicial, action) {
     case OBTENER_POR_PAG:
       return {
         ...state,
-        razas: action.payload,
+        razas: action.payload.data,
+        longitud: action.payload.longitud,
       };
 
     case OBTENER_POR_NOMBRE:
+      return {
+        ...state,
+        razas: action.payload.data,
+        longitud: action.payload.longitud,
+        busqueda: action.payload.busqueda,
+      };
+
+    case OBTENER_PARA_ORDENAR:
       return {
         ...state,
         razas: action.payload.data,

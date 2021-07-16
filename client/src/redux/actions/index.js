@@ -5,6 +5,7 @@ export const OBTENER_TEMPERAMENTOS = "OBTENER_TEMPERAMENTOS";
 export const OBTENER_POR_ID = "OBTENER_POR_ID";
 export const OBTENER_POR_PAG = "OBTENER_POR_PAG";
 export const OBTENER_POR_NOMBRE = "OBTENER_POR_NOMBRE";
+export const OBTENER_PARA_ORDENAR = "OBTENER_PARA_ORDENAR";
 export const CREAR_RAZA = "CREAR_RAZA";
 
 export function obtenerRazas() {
@@ -23,7 +24,7 @@ export function obtenerPorPag(pag) {
   return async function (dispatch) {
     try {
       const { data } = await axios("http://localhost:3001/dogs?pag=" + pag);
-      // console.log("----------", data);
+      // console.log("----------por pagina", data);
       return dispatch({ type: OBTENER_POR_PAG, payload: data });
     } catch (err) {
       console.log(err);
@@ -35,7 +36,7 @@ export function obtenerPorId(id) {
   return async function (dispatch) {
     try {
       const { data } = await axios("http://localhost:3001/dogs/" + id);
-      //   console.log("------------", data);
+      console.log("------------por id", data);
       return dispatch({ type: OBTENER_POR_ID, payload: data });
     } catch (err) {
       console.log(err);
@@ -54,14 +55,52 @@ export function obtenerTemperamentos() {
   };
 }
 
-export function obtenerPorNombre(nombre, pag) {
+export function obtenerPorNombre(payload) {
+  return async function (dispatch) {
+    try {
+      if (payload.orden || payload.pagina) {
+        const { data } = await axios(
+          "http://localhost:3001/dogs?ordAsc=" +
+            payload.orden +
+            "&name=" +
+            payload.nombre +
+            "&pag=" +
+            payload.pagina
+        );
+        data.busqueda = payload.nombre;
+        console.log("action --", data);
+        return dispatch({ type: OBTENER_POR_NOMBRE, payload: data });
+        // }
+        // else if (payload.pagina) {
+        //   const { data } = await axios(
+        //     "http://localhost:3001/dogs?name=" +
+        //       payload.nombre +
+        //       "&pag=" +
+        //       payload.pagina
+        //   );
+        //   data.busqueda = payload.nombre;
+        //   return dispatch({ type: OBTENER_POR_NOMBRE, payload: data });
+      } else {
+        const { data } = await axios(
+          "http://localhost:3001/dogs?name=" + payload.nombre
+        );
+        data.busqueda = payload.nombre;
+        return dispatch({ type: OBTENER_POR_NOMBRE, payload: data });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+
+export function obtenerParaOrdenar(orden, pag) {
   return async function (dispatch) {
     try {
       const { data } = await axios(
-        "http://localhost:3001/dogs?name=" + nombre + "&pag=" + pag
+        "http://localhost:3001/dogs/orden?ordenarAsc=" + orden + "&pag=" + pag
       );
-      console.log("-----------------name", data);
-      return dispatch({ type: OBTENER_POR_NOMBRE, payload: data });
+      console.log("------------para orden", data);
+      return dispatch({ type: OBTENER_PARA_ORDENAR, payload: data });
     } catch (err) {
       console.log(err);
     }

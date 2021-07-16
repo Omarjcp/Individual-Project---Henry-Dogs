@@ -1,28 +1,26 @@
 import { Raza } from "./raza";
 import { Navbar } from "../navbar";
 import {
-  obtenerRazas,
-  obtenerPorPag,
   obtenerPorNombre,
+  obtenerPorPag,
+  obtenerParaOrdenar,
 } from "../../redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // import { } from "./styled";
 
 export const Principal = () => {
   const dispatch = useDispatch();
-  let { razas, longitud } = useSelector((state) => state);
-  let { pag } = useParams();
+  const history = useHistory();
+  let { razas, longitud, busqueda } = useSelector((state) => state);
+  let [orden, setOrden] = useState(false);
+  let [pagina, setPagina] = useState(0);
 
   useEffect(() => {
-    if (pag) {
-      dispatch(obtenerPorPag(pag));
-    } else {
-      dispatch(obtenerRazas());
-    }
-  }, [pag]);
+    dispatch(obtenerPorPag(0));
+  }, []);
 
   let paginas = Math.ceil(longitud / 8);
   let arrayPaginas = [];
@@ -31,33 +29,44 @@ export const Principal = () => {
     arrayPaginas.push(i);
   }
 
+  function handlerSelect(e) {
+    const { value } = e.target;
+    switch (value) {
+      case "3":
+        setOrden(false);
+        if (busqueda) {
+          console.log("caso 3 a-z", value, busqueda, pagina);
+          return dispatch(
+            obtenerPorNombre({ orden: value, nombre: busqueda, pagina: pagina })
+          );
+        } else {
+          return dispatch(obtenerPorPag(pagina));
+        }
+
+      case "4":
+        setOrden(value);
+        if (busqueda) {
+          console.log("caso 4 z-a", value, busqueda, pagina);
+          return dispatch(
+            obtenerPorNombre({ orden: value, nombre: busqueda, pagina: pagina })
+          );
+        } else {
+          return dispatch(obtenerParaOrdenar(value, pagina));
+        }
+
+      default:
+        break;
+    }
+  }
+
+  function regresar() {
+    history.go(0);
+  }
+
   return (
     <div>
-      <Navbar />
+      <Navbar path={regresar} setPagina={setPagina} />
       <div style={{ marginTop: "5rem" }}>
-        {/* <div>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              onSearch();
-              setPerro("");
-            }}
-          >
-            <input
-              placeholder="Buscar por raza..."
-              value={perro}
-              onChange={handlePerro}
-            />
-            {!perro ? (
-              <button disabled>Buscar</button>
-            ) : (
-              <Link to={`/principal/${0}/${perro}`}>
-                <button type="submit">Buscar</button>
-              </Link>
-            )}
-          </form>
-        </div> */}
-
         <div
           style={{
             display: "flex",
@@ -65,7 +74,11 @@ export const Principal = () => {
             width: "90%",
           }}
         >
-          <select name="filtrado" style={{ width: "12rem", height: "1.5rem" }}>
+          <select
+            name="filtrado"
+            onChange={handlerSelect}
+            style={{ width: "12rem", height: "1.5rem" }}
+          >
             <option disabled selected>
               Ordenar por
             </option>
@@ -114,12 +127,28 @@ export const Principal = () => {
         style={{ display: "flex", justifyContent: "center", margin: "2rem" }}
       >
         {arrayPaginas.map((pag, i) => (
-          <Link
-            to={`/principal/${i}`}
-            style={{ margin: ".5rem", textDecoration: "none" }}
+          <button
+            onClick={() => {
+              setPagina(i);
+              console.log(i);
+              if (busqueda) {
+                return dispatch(
+                  obtenerPorNombre({
+                    orden: orden,
+                    nombre: busqueda,
+                    pagina: i,
+                  })
+                );
+              }
+              if (orden) {
+                return dispatch(obtenerParaOrdenar(orden, i));
+              } else {
+                return dispatch(obtenerPorPag(i));
+              }
+            }}
           >
             {pag}
-          </Link>
+          </button>
         ))}
       </div>
     </div>
