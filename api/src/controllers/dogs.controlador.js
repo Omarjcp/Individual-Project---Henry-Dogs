@@ -3,22 +3,105 @@ const { Raza, Temperamento } = require("../db.js");
 const {
   obtenerPrincipalRazas,
   obtenerDetalleDeRazas,
+  obtenerRazasOrdenar,
 } = require("./funciones/razasPrincipal.js");
+
+async function obtenerOrdenado(req, res) {
+  let { ordenarAsc, pesAsc, pesDes, pag } = req.query;
+
+  let RazasOrdenar = await obtenerRazasOrdenar();
+
+  if (ordenarAsc === "4") {
+    let ordenarRazasDes = RazasOrdenar;
+    let longitudRazasFiltradas = ordenarRazasDes.length;
+    ordenarRazasDes.sort((a, b) => {
+      let nombreA = a.name.toLowerCase();
+      let nombreB = b.name.toLowerCase();
+
+      if (nombreB < nombreA) {
+        return -1;
+      }
+
+      if (nombreB > nombreA) {
+        return 1;
+      }
+      return 0;
+    });
+
+    if (pag) {
+      let desde = Number(pag) * 8;
+      let hasta = desde + 8;
+      let siguientesOcho = await ordenarRazasDes.slice(desde, hasta);
+
+      return res.json({
+        data: siguientesOcho,
+        longitud: longitudRazasFiltradas,
+      });
+    }
+
+    let primerosOcho = await ordenarRazasDes.slice(0, 8);
+    res.json({
+      data: primerosOcho,
+      longitud: longitudRazasFiltradas,
+    });
+  }
+}
 
 //8 primeras razas de db y api
 async function obtenerRazas(req, res) {
   try {
-    let { name } = req.query;
-    let { pag } = req.query;
+    let { name, pag, ordAsc } = req.query;
+
     //todas las razas api & db
     let todasRazas = await obtenerPrincipalRazas();
 
-    //si existe la query
+    //si existe la query name
     if (name) {
       //nombres de razas que incluyan la query
       let razasFiltradas = todasRazas.filter((raza) => {
         if (raza.name.toLowerCase().includes(name.toLowerCase())) return raza;
       });
+
+      if (ordAsc === "4" && name) {
+        let RazasOrdenar = await obtenerRazasOrdenar();
+
+        let ordenarRazasDes = RazasOrdenar.filter((raza) => {
+          if (raza.name.toLowerCase().includes(name.toLowerCase())) return raza;
+        });
+
+        let longitudRazasFiltradas = ordenarRazasDes.length;
+
+        ordenarRazasDes.sort((a, b) => {
+          let nombreA = a.name.toLowerCase();
+          let nombreB = b.name.toLowerCase();
+
+          if (nombreB < nombreA) {
+            return -1;
+          }
+
+          if (nombreB > nombreA) {
+            return 1;
+          }
+          return 0;
+        });
+
+        if (pag) {
+          let desde = Number(pag) * 8;
+          let hasta = desde + 8;
+          let siguientesOcho = await ordenarRazasDes.slice(desde, hasta);
+
+          return res.json({
+            data: siguientesOcho,
+            longitud: longitudRazasFiltradas,
+          });
+        }
+
+        let primerosOcho = await ordenarRazasDes.slice(0, 8);
+        res.json({
+          data: primerosOcho,
+          longitud: longitudRazasFiltradas,
+        });
+      }
 
       let longitudRazasFiltradas = razasFiltradas.length;
 
@@ -54,7 +137,10 @@ async function obtenerRazas(req, res) {
       let desde = Number(pag) * 8;
       let hasta = desde + 8;
       let siguientesOcho = await todasRazas.slice(desde, hasta);
-      return res.json(siguientesOcho);
+      return res.json({
+        data: siguientesOcho,
+        longitud: longitudTodasRazas,
+      });
     }
 
     //las 8 primeras razas del total
@@ -91,4 +177,5 @@ async function obtenerRazaId(req, res) {
 module.exports = {
   obtenerRazas,
   obtenerRazaId,
+  obtenerOrdenado,
 };

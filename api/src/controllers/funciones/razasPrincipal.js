@@ -1,60 +1,98 @@
-const axios = require('axios')
-const { Raza, Temperamento } = require('../../db.js')
+const axios = require("axios");
+const { Raza, Temperamento } = require("../../db.js");
 
 //obtener todas las razas para la ruta principal
 async function obtenerPrincipalRazas() {
-    let { data } = await axios(`https://api.thedogapi.com/v1/breeds`)
+  let { data } = await axios(`https://api.thedogapi.com/v1/breeds`);
 
-    //solicitud a DB
-    let razas = await Raza.findAll({
-        attributes: ["name", "id", "weight", "life_span" ],
-        include: {model: Temperamento, attributes: ["name"], through: {attributes: []}}
-    })
+  //solicitud a DB
+  let razas = await Raza.findAll({
+    attributes: ["name", "id", "weight", "life_span"],
+    include: {
+      model: Temperamento,
+      attributes: ["name"],
+      through: { attributes: [] },
+    },
+  });
 
-    let razasParaPrincipal = data.map(perro => {
-        return {
-            name: perro.name,
-            id: perro.id,
-            weight: perro.weight.metric,
-            life_span: perro.life_span,
-            temperaments: perro.temperament,
-            image: perro.image.url
-        }
-    })
+  let razasParaPrincipal = data.map((perro) => {
+    return {
+      name: perro.name,
+      id: perro.id,
+      weight: perro.weight.metric,
+      life_span: perro.life_span,
+      temperaments: perro.temperament,
+      image: perro.image.url,
+    };
+  });
 
-    // concatenacion de ambas peticiones
-    return razas.concat(razasParaPrincipal)
+  // concatenacion de ambas peticiones
+  let dbApiConcat = razas.concat(razasParaPrincipal);
+  return dbApiConcat;
 }
 
+//obtener todas las razas para ordenar
+async function obtenerRazasOrdenar() {
+  let { data } = await axios(`https://api.thedogapi.com/v1/breeds`);
+
+  //solicitud a DB
+  let razas = await Raza.findAll({
+    attributes: ["name", "id", "weight", "life_span"],
+    include: {
+      model: Temperamento,
+      attributes: ["name"],
+      through: { attributes: [] },
+    },
+  });
+
+  let razasParaPrincipal = data.map((perro) => {
+    return {
+      name: perro.name,
+      id: perro.id,
+      weight: perro.weight.metric,
+      life_span: perro.life_span,
+      temperaments: perro.temperament,
+      image: perro.image.url,
+    };
+  });
+
+  // concatenacion de ambas peticiones
+  let dbApiConcat = razas.concat(razasParaPrincipal);
+  return dbApiConcat;
+}
 
 //obtener todas las razas para la ruta de detalles
 async function obtenerDetalleDeRazas() {
-    let { data } = await axios(`https://api.thedogapi.com/v1/breeds`)
+  let { data } = await axios(`https://api.thedogapi.com/v1/breeds`);
 
-    //solicitud a DB
-    let razas = await Raza.findAll({
-        attributes: [ "name", "id", "weight", "life_span", "height" ],
-        include: {model: Temperamento, attributes: ["name"], through: {attributes: []}}
-    })
+  //solicitud a DB
+  let razas = await Raza.findAll({
+    attributes: ["name", "id", "weight", "life_span", "height"],
+    include: {
+      model: Temperamento,
+      attributes: ["name"],
+      through: { attributes: [] },
+    },
+  });
 
-    let razasParaDetalles = data.map(perro => {
-        return {
-            name: perro.name,
-            id: perro.id,
-            weight: perro.weight.metric,
-            height: perro.height.metric,
-            life_span: perro.life_span,
-            temperaments: perro.temperament,
-            image: perro.image.url
-        }
-    })
+  let razasParaDetalles = data.map((perro) => {
+    return {
+      name: perro.name,
+      id: perro.id,
+      weight: perro.weight.metric,
+      height: perro.height.metric,
+      life_span: perro.life_span,
+      temperaments: perro.temperament,
+      image: perro.image.url,
+    };
+  });
 
-    // concatenacion de ambas peticiones
-    return razas.concat(razasParaDetalles)
+  // concatenacion de ambas peticiones
+  return razas.concat(razasParaDetalles);
 }
-
 
 module.exports = {
-    obtenerPrincipalRazas,
-    obtenerDetalleDeRazas,
-}
+  obtenerPrincipalRazas,
+  obtenerDetalleDeRazas,
+  obtenerRazasOrdenar,
+};
