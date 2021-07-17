@@ -19,8 +19,8 @@ async function ordenarPesoAsc(arrayAOrdenarAsc) {
 
 async function ordenarPesoDes(arrayAOrdenarDes) {
   let razasOrdenadasPesoDes = arrayAOrdenarDes.sort((a, b) => {
-    let pesoA = parseFloat(a.weight);
-    let pesoB = parseFloat(b.weight);
+    let pesoA = parseInt(a.weight);
+    let pesoB = parseInt(b.weight);
 
     if (pesoB < pesoA) {
       return -1;

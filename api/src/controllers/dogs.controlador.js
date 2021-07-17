@@ -15,7 +15,7 @@ const {
 
 async function obtenerOrdenado(req, res) {
   try {
-    let { ordenarAsc, pesAsc, pesDes, pag } = req.query;
+    let { orden, pag } = req.query;
 
     let razasOrdenar = await obtenerRazasOrdenar();
     razasOrdenar = razasOrdenar.map((raza) => {
@@ -23,7 +23,7 @@ async function obtenerOrdenado(req, res) {
       return raza;
     });
 
-    if (pesDes === "1") {
+    if (orden === "1") {
       let ordenarPorPesoDes = await ordenarPesoDes(razasOrdenar);
 
       let longitudRazasOrdenadas = ordenarPorPesoDes.length;
@@ -44,7 +44,7 @@ async function obtenerOrdenado(req, res) {
       });
     }
 
-    if (pesAsc === "2") {
+    if (orden === "2") {
       let ordenarPorPesoAsc = await ordenarPesoAsc(razasOrdenar);
 
       let longitudRazasOrdenadas = ordenarPorPesoAsc.length;
@@ -64,7 +64,7 @@ async function obtenerOrdenado(req, res) {
       });
     }
 
-    if (ordenarAsc === "4") {
+    if (orden === "4") {
       let ordenarRazasAsc = await ordenAlfAsc(razasOrdenar);
 
       let longitudRazasOrdenadas = ordenarRazasAsc.length;
@@ -92,7 +92,7 @@ async function obtenerOrdenado(req, res) {
 //8 primeras razas de db y api
 async function obtenerRazas(req, res) {
   try {
-    let { name, pag, ordAsc, pesAsc, pesDes } = req.query;
+    let { name, pag, orden } = req.query;
 
     //todas las razas api & db
     let todasRazas = await obtenerPrincipalRazas();
@@ -106,7 +106,7 @@ async function obtenerRazas(req, res) {
         return raza;
       });
 
-      if (pesDes === "1") {
+      if (orden === "1") {
         let ordenarPorPesoDes = await ordenarPesoDes(razasFiltradas);
 
         let longitudRazasOrdenadas = ordenarPorPesoDes.length;
@@ -127,7 +127,7 @@ async function obtenerRazas(req, res) {
         });
       }
 
-      if (pesAsc === "2") {
+      if (orden === "2") {
         let ordenarPorPesoAsc = await ordenarPesoAsc(razasFiltradas);
 
         let longitudRazasOrdenadas = ordenarPorPesoAsc.length;
@@ -147,7 +147,7 @@ async function obtenerRazas(req, res) {
         });
       }
 
-      if (ordAsc === "4" && name) {
+      if (orden === "4" && name) {
         let razasOrdenar = await obtenerRazasOrdenar();
 
         let razasFiltradasParaOrdenar = await filtradoNombre(
