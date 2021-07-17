@@ -12,7 +12,6 @@ export function obtenerRazas() {
   return async function (dispatch) {
     try {
       const { data } = await axios("http://localhost:3001/dogs");
-      // console.log("---------", data);
       return dispatch({ type: OBTENER_RAZAS, payload: data });
     } catch (err) {
       console.log(err);
@@ -24,7 +23,6 @@ export function obtenerPorPag(pag) {
   return async function (dispatch) {
     try {
       const { data } = await axios("http://localhost:3001/dogs?pag=" + pag);
-      // console.log("----------por pagina", data);
       return dispatch({ type: OBTENER_POR_PAG, payload: data });
     } catch (err) {
       console.log(err);
@@ -56,9 +54,10 @@ export function obtenerTemperamentos() {
 }
 
 export function obtenerPorNombre(payload) {
+  console.log(payload);
   return async function (dispatch) {
     try {
-      if (payload.orden || payload.pagina) {
+      if (payload.orden === "4") {
         const { data } = await axios(
           "http://localhost:3001/dogs?ordAsc=" +
             payload.orden +
@@ -68,21 +67,35 @@ export function obtenerPorNombre(payload) {
             payload.pagina
         );
         data.busqueda = payload.nombre;
-        console.log("action --", data);
         return dispatch({ type: OBTENER_POR_NOMBRE, payload: data });
-        // }
-        // else if (payload.pagina) {
-        //   const { data } = await axios(
-        //     "http://localhost:3001/dogs?name=" +
-        //       payload.nombre +
-        //       "&pag=" +
-        //       payload.pagina
-        //   );
-        //   data.busqueda = payload.nombre;
-        //   return dispatch({ type: OBTENER_POR_NOMBRE, payload: data });
+      } else if (payload.orden === "2") {
+        const { data } = await axios(
+          "http://localhost:3001/dogs?pesAsc=" +
+            payload.orden +
+            "&name=" +
+            payload.nombre +
+            "&pag=" +
+            payload.pagina
+        );
+        data.busqueda = payload.nombre;
+        return dispatch({ type: OBTENER_POR_NOMBRE, payload: data });
+      } else if (payload.orden === "1") {
+        const { data } = await axios(
+          "http://localhost:3001/dogs?pesDes=" +
+            payload.orden +
+            "&name=" +
+            payload.nombre +
+            "&pag=" +
+            payload.pagina
+        );
+        data.busqueda = payload.nombre;
+        return dispatch({ type: OBTENER_POR_NOMBRE, payload: data });
       } else {
         const { data } = await axios(
-          "http://localhost:3001/dogs?name=" + payload.nombre
+          "http://localhost:3001/dogs?name=" +
+            payload.nombre +
+            "&pag=" +
+            payload.pagina
         );
         data.busqueda = payload.nombre;
         return dispatch({ type: OBTENER_POR_NOMBRE, payload: data });
@@ -96,11 +109,22 @@ export function obtenerPorNombre(payload) {
 export function obtenerParaOrdenar(orden, pag) {
   return async function (dispatch) {
     try {
-      const { data } = await axios(
-        "http://localhost:3001/dogs/orden?ordenarAsc=" + orden + "&pag=" + pag
-      );
-      console.log("------------para orden", data);
-      return dispatch({ type: OBTENER_PARA_ORDENAR, payload: data });
+      if (orden === "4") {
+        const { data } = await axios(
+          "http://localhost:3001/dogs/orden?ordenarAsc=" + orden + "&pag=" + pag
+        );
+        return dispatch({ type: OBTENER_PARA_ORDENAR, payload: data });
+      } else if (orden === "2") {
+        const { data } = await axios(
+          "http://localhost:3001/dogs/orden?pesAsc=" + orden + "&pag=" + pag
+        );
+        return dispatch({ type: OBTENER_PARA_ORDENAR, payload: data });
+      } else {
+        const { data } = await axios(
+          "http://localhost:3001/dogs/orden?pesDes=" + orden + "&pag=" + pag
+        );
+        return dispatch({ type: OBTENER_PARA_ORDENAR, payload: data });
+      }
     } catch (err) {
       console.log(err);
     }

@@ -10,7 +10,6 @@ import {
 } from "./styled";
 
 export const Raza = ({ razas }) => {
-  // console.log(razas);
   return (
     <>
       <DivRazas>

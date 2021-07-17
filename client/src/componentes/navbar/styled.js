@@ -20,6 +20,7 @@ export const Linknav = styled(Link)`
 
 export const NavB = styled.nav`
   display: flex;
+  justify-content: space-between;
   align-items: center;
   background-color: grey;
   border-bottom: 1.5px solid #666565;
@@ -29,4 +30,6 @@ export const NavB = styled.nav`
   width: 100%;
 `;
 
-export const ContenedorBuscador = styled.div``;
+export const ContenedorBuscador = styled.div`
+  margin-right: 4rem;
+`;

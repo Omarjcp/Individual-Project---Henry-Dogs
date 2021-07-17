@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
-export const Navbar = ({ path, setPagina }) => {
+export const Navbar = ({ path, setPagina, pagina }) => {
   const dispatch = useDispatch();
   let { busqueda } = useSelector((state) => state);
   let [perros, setPerros] = useState(busqueda);
@@ -15,23 +15,24 @@ export const Navbar = ({ path, setPagina }) => {
   };
 
   let onSearch = () => {
-    dispatch(obtenerPorNombre({ nombre: perros }));
+    dispatch(obtenerPorNombre({ nombre: perros, pagina: 0 }));
     setPerros("");
   };
 
   return (
     <>
       <NavB>
-        <div>
-          <Link to="/">
-            <Img src={Icono} />
-          </Link>
-        </div>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <div>
+            <Link to="/">
+              <Img src={Icono} />
+            </Link>
+          </div>
 
-        <div style={{ marginLeft: "2rem" }}>
-          <button onClick={path}>Inicio</button>
-          <Linknav to="/crear-raza">Crear Raza</Linknav>
-          {/* <Linknav to="Ranks">Ranks</Linknav>*/}
+          <div style={{ marginLeft: "2rem" }}>
+            <button onClick={path}>Inicio</button>
+            <Linknav to="/crear-raza">Crear Raza</Linknav>
+          </div>
         </div>
 
         <ContenedorBuscador>
@@ -39,8 +40,8 @@ export const Navbar = ({ path, setPagina }) => {
             onSubmit={(e) => {
               e.preventDefault();
               onSearch();
-              setPerros("");
               setPagina(0);
+              setPerros("");
             }}
           >
             <input
@@ -48,6 +49,7 @@ export const Navbar = ({ path, setPagina }) => {
               value={perros}
               onChange={handlePerro}
             />
+            {/* ver esto v */}
             {perros ? (
               <button type="submit">Buscar</button>
             ) : (
