@@ -34,7 +34,6 @@ export function obtenerPorId(id) {
   return async function (dispatch) {
     try {
       const { data } = await axios("http://localhost:3001/dogs/" + id);
-      console.log("------------por id", data);
       return dispatch({ type: OBTENER_POR_ID, payload: data });
     } catch (err) {
       console.log(err);
@@ -57,31 +56,9 @@ export function obtenerPorNombre(payload) {
   console.log(payload);
   return async function (dispatch) {
     try {
-      if (payload.orden === "4") {
+      if (payload.orden) {
         const { data } = await axios(
-          "http://localhost:3001/dogs?ordAsc=" +
-            payload.orden +
-            "&name=" +
-            payload.nombre +
-            "&pag=" +
-            payload.pagina
-        );
-        data.busqueda = payload.nombre;
-        return dispatch({ type: OBTENER_POR_NOMBRE, payload: data });
-      } else if (payload.orden === "2") {
-        const { data } = await axios(
-          "http://localhost:3001/dogs?pesAsc=" +
-            payload.orden +
-            "&name=" +
-            payload.nombre +
-            "&pag=" +
-            payload.pagina
-        );
-        data.busqueda = payload.nombre;
-        return dispatch({ type: OBTENER_POR_NOMBRE, payload: data });
-      } else if (payload.orden === "1") {
-        const { data } = await axios(
-          "http://localhost:3001/dogs?pesDes=" +
+          "http://localhost:3001/dogs?orden=" +
             payload.orden +
             "&name=" +
             payload.nombre +
@@ -109,22 +86,10 @@ export function obtenerPorNombre(payload) {
 export function obtenerParaOrdenar(orden, pag) {
   return async function (dispatch) {
     try {
-      if (orden === "4") {
-        const { data } = await axios(
-          "http://localhost:3001/dogs/orden?ordenarAsc=" + orden + "&pag=" + pag
-        );
-        return dispatch({ type: OBTENER_PARA_ORDENAR, payload: data });
-      } else if (orden === "2") {
-        const { data } = await axios(
-          "http://localhost:3001/dogs/orden?pesAsc=" + orden + "&pag=" + pag
-        );
-        return dispatch({ type: OBTENER_PARA_ORDENAR, payload: data });
-      } else {
-        const { data } = await axios(
-          "http://localhost:3001/dogs/orden?pesDes=" + orden + "&pag=" + pag
-        );
-        return dispatch({ type: OBTENER_PARA_ORDENAR, payload: data });
-      }
+      const { data } = await axios(
+        "http://localhost:3001/dogs/orden?orden=" + orden + "&pag=" + pag
+      );
+      return dispatch({ type: OBTENER_PARA_ORDENAR, payload: data });
     } catch (err) {
       console.log(err);
     }
