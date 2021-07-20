@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { Boton } from "./boton";
 
-export const Paginado = ({ setPagina, orden }) => {
+export const Paginado = ({ setPagina, orden, temperam }) => {
   let { longitud } = useSelector((state) => state);
 
   let paginas = Math.ceil(longitud / 8);
@@ -14,7 +14,13 @@ export const Paginado = ({ setPagina, orden }) => {
   return (
     <>
       {arrayPaginas.map((pag, i) => (
-        <Boton setPagina={setPagina} orden={orden} pag={pag} i={i} />
+        <Boton
+          setPagina={setPagina}
+          orden={orden}
+          pag={pag}
+          i={i}
+          temperam={temperam}
+        />
       ))}
     </>
   );

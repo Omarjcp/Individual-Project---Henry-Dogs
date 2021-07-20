@@ -5,10 +5,12 @@ import {
   OBTENER_POR_NOMBRE,
   OBTENER_POR_PAG,
   OBTENER_PARA_ORDENAR,
+  OBTENER_POR_TEMPERAMENTO,
   CREAR_RAZA,
 } from "../actions/index";
 
 const estadoInicial = {
+  todasRazas: [],
   razas: [],
   temperamentos: [],
   razaId: {},
@@ -20,7 +22,7 @@ export default function rootReducer(state = estadoInicial, action) {
     case OBTENER_RAZAS:
       return {
         ...state,
-        razas: action.payload.data,
+        todasRazas: action.payload.data,
         longitud: action.payload.longitud,
       };
 
@@ -50,6 +52,19 @@ export default function rootReducer(state = estadoInicial, action) {
       return {
         ...state,
         razaId: action.payload[0],
+      };
+
+    case OBTENER_TEMPERAMENTOS:
+      return {
+        ...state,
+        temperamentos: action.payload.data,
+      };
+
+    case OBTENER_POR_TEMPERAMENTO:
+      return {
+        ...state,
+        razas: action.payload.data,
+        longitud: action.payload.longitud,
       };
 
     default:

@@ -3,9 +3,10 @@ import {
   obtenerParaOrdenar,
   obtenerPorNombre,
   obtenerPorPag,
+  obtenerPorTemperamento,
 } from "../../../redux/actions";
 
-export const Select = ({ pagina, setOrden }) => {
+export const Select = ({ pagina, setOrden, temperam }) => {
   let { busqueda } = useSelector((state) => state);
   const dispatch = useDispatch();
 
@@ -14,9 +15,18 @@ export const Select = ({ pagina, setOrden }) => {
     switch (value) {
       case "1":
         setOrden(value);
-        if (busqueda) {
+        if (busqueda && !temperam) {
           return dispatch(
             obtenerPorNombre({ orden: value, nombre: busqueda, pagina: pagina })
+          );
+        }
+        if (temperam) {
+          return dispatch(
+            obtenerPorTemperamento({
+              temperamento: temperam,
+              pag: pagina,
+              orden: value,
+            })
           );
         } else {
           return dispatch(obtenerParaOrdenar(value, pagina));
@@ -24,9 +34,18 @@ export const Select = ({ pagina, setOrden }) => {
 
       case "2":
         setOrden(value);
-        if (busqueda) {
+        if (busqueda && !temperam) {
           return dispatch(
             obtenerPorNombre({ orden: value, nombre: busqueda, pagina: pagina })
+          );
+        }
+        if (temperam) {
+          return dispatch(
+            obtenerPorTemperamento({
+              temperamento: temperam,
+              pag: pagina,
+              orden: value,
+            })
           );
         } else {
           return dispatch(obtenerParaOrdenar(value, pagina));
@@ -34,9 +53,17 @@ export const Select = ({ pagina, setOrden }) => {
 
       case "3":
         setOrden(false);
-        if (busqueda) {
+        if (busqueda && !temperam) {
           return dispatch(
             obtenerPorNombre({ orden: value, nombre: busqueda, pagina: pagina })
+          );
+        }
+        if (temperam) {
+          return dispatch(
+            obtenerPorTemperamento({
+              temperamento: temperam,
+              pag: pagina,
+            })
           );
         } else {
           return dispatch(obtenerPorPag(pagina));
@@ -44,9 +71,18 @@ export const Select = ({ pagina, setOrden }) => {
 
       case "4":
         setOrden(value);
-        if (busqueda) {
+        if (busqueda && !temperam) {
           return dispatch(
             obtenerPorNombre({ orden: value, nombre: busqueda, pagina: pagina })
+          );
+        }
+        if (temperam) {
+          return dispatch(
+            obtenerPorTemperamento({
+              temperamento: temperam,
+              pag: pagina,
+              orden: value,
+            })
           );
         } else {
           return dispatch(obtenerParaOrdenar(value, pagina));

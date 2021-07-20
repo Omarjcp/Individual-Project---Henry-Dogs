@@ -3,9 +3,10 @@ import {
   obtenerParaOrdenar,
   obtenerPorNombre,
   obtenerPorPag,
+  obtenerPorTemperamento,
 } from "../../../redux/actions";
 
-export const Boton = ({ setPagina, orden, pag, i }) => {
+export const Boton = ({ setPagina, orden, pag, i, temperam }) => {
   let { busqueda } = useSelector((state) => state);
   const dispatch = useDispatch();
 
@@ -13,12 +14,29 @@ export const Boton = ({ setPagina, orden, pag, i }) => {
     <button
       onClick={() => {
         setPagina(i);
-        if (busqueda) {
+        if (busqueda && !temperam) {
           return dispatch(
             obtenerPorNombre({
               orden: orden,
               nombre: busqueda,
               pagina: i,
+            })
+          );
+        }
+        if (temperam && orden) {
+          return dispatch(
+            obtenerPorTemperamento({
+              temperamento: temperam,
+              pag: i,
+              orden: orden,
+            })
+          );
+        }
+        if (temperam) {
+          return dispatch(
+            obtenerPorTemperamento({
+              temperamento: temperam,
+              pag: i,
             })
           );
         }

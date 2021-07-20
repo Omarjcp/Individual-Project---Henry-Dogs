@@ -2,6 +2,7 @@ const axios = require("axios");
 
 export const OBTENER_RAZAS = "OBTENER_RAZAS";
 export const OBTENER_TEMPERAMENTOS = "OBTENER_TEMPERAMENTOS";
+export const OBTENER_POR_TEMPERAMENTO = "OBTENER_POR_TEMPERAMENTO";
 export const OBTENER_POR_ID = "OBTENER_POR_ID";
 export const OBTENER_POR_PAG = "OBTENER_POR_PAG";
 export const OBTENER_POR_NOMBRE = "OBTENER_POR_NOMBRE";
@@ -44,8 +45,36 @@ export function obtenerPorId(id) {
 export function obtenerTemperamentos() {
   return async function (dispatch) {
     try {
-      const temperamentos = await axios("http://localhost:3001/temperament");
-      return dispatch({ type: OBTENER_TEMPERAMENTOS, payload: temperamentos });
+      const { data } = await axios("http://localhost:3001/temperament");
+      return dispatch({ type: OBTENER_TEMPERAMENTOS, payload: data });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+
+export function obtenerPorTemperamento(payload) {
+  return async function (dispatch) {
+    try {
+      if (payload.orden) {
+        const { data } = await axios(
+          "http://localhost:3001/dogs/temp?temper=" +
+            payload.temperamento +
+            "&pag=" +
+            payload.pag +
+            "&orden=" +
+            payload.orden
+        );
+        return dispatch({ type: OBTENER_POR_TEMPERAMENTO, payload: data });
+      } else {
+        const { data } = await axios(
+          "http://localhost:3001/dogs/temp?temper=" +
+            payload.temperamento +
+            "&pag=" +
+            payload.pag
+        );
+        return dispatch({ type: OBTENER_POR_TEMPERAMENTO, payload: data });
+      }
     } catch (err) {
       console.log(err);
     }
@@ -53,7 +82,6 @@ export function obtenerTemperamentos() {
 }
 
 export function obtenerPorNombre(payload) {
-  console.log(payload);
   return async function (dispatch) {
     try {
       if (payload.orden) {

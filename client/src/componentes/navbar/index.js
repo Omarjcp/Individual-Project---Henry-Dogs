@@ -5,10 +5,9 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
-export const Navbar = ({ path, setPagina, pagina }) => {
+export const Navbar = ({ path, setPagina, setTemperam }) => {
   const dispatch = useDispatch();
-  let { busqueda } = useSelector((state) => state);
-  let [perros, setPerros] = useState(busqueda);
+  let [perros, setPerros] = useState("");
 
   let handlePerro = (e) => {
     setPerros(e.target.value);
@@ -16,7 +15,6 @@ export const Navbar = ({ path, setPagina, pagina }) => {
 
   let onSearch = () => {
     dispatch(obtenerPorNombre({ nombre: perros, pagina: 0 }));
-    setPerros("");
   };
 
   return (
@@ -42,14 +40,16 @@ export const Navbar = ({ path, setPagina, pagina }) => {
               onSearch();
               setPagina(0);
               setPerros("");
+              setTemperam(false);
             }}
           >
             <input
+              type="search"
               placeholder="Buscar por raza..."
               value={perros}
               onChange={handlePerro}
             />
-            {/* ver esto v */}
+
             {perros ? (
               <button type="submit">Buscar</button>
             ) : (
