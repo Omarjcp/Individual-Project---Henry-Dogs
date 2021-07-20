@@ -6,8 +6,8 @@ const {
   obtenerRazasOrdenar,
 } = require("./funciones/razasPrincipal.js");
 const ordenAlfAsc = require("./funciones/ordenar/ordenarAlf");
-const filtradoNombre = require("./funciones/filtradoNombre");
-const divicionDePagina = require("./funciones/divicionPag");
+const filtradoNombre = require("./funciones/utils/filtradoNombre");
+const divicionDePagina = require("./funciones/utils/divicionPag");
 const {
   ordenarPesoAsc,
   ordenarPesoDes,
@@ -212,12 +212,12 @@ async function obtenerRazas(req, res) {
     }
 
     //las 8 primeras razas del total
-    let primerosOcho = await todasRazas.slice(0, 8);
+    // let primerosOcho = await todasRazas.slice(0, 8);
 
-    // miestra las razas
-    if (primerosOcho) {
+    // muestra las razas
+    if (todasRazas) {
       return res.json({
-        data: primerosOcho,
+        data: todasRazas,
         longitud: longitudTodasRazas,
       });
     }

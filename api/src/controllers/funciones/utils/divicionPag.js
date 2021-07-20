@@ -1,3 +1,5 @@
+//obtiene 1 pagina de las 8 razas empezando desde la "pagina" pasada por argumento
+
 async function divicionDePagina(razasADividir, pagina) {
   let desde = Number(pagina) * 8;
   let hasta = desde + 8;
