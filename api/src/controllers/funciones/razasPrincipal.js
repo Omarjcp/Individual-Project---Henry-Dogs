@@ -1,5 +1,6 @@
 const axios = require("axios");
 const { Raza, Temperamento } = require("../../db.js");
+const { ordenAlfDes } = require("./ordenar/ordenarAlf.js");
 
 //obtener todas las razas para la ruta principal
 async function obtenerPrincipalRazas() {
@@ -28,7 +29,8 @@ async function obtenerPrincipalRazas() {
 
   // concatenacion de ambas peticiones
   let dbApiConcat = razas.concat(razasParaPrincipal);
-  return dbApiConcat;
+  let arrayOrdenado = await ordenAlfDes(dbApiConcat);
+  return arrayOrdenado;
 }
 
 //obtener todas las razas para ordenar
@@ -58,7 +60,8 @@ async function obtenerRazasOrdenar() {
 
   // concatenacion de ambas peticiones
   let dbApiConcat = razas.concat(razasParaPrincipal);
-  return dbApiConcat;
+  let arrayOrdenado = await ordenAlfDes(dbApiConcat);
+  return arrayOrdenado;
 }
 
 //obtener todas las razas para la ruta de detalles

@@ -3,20 +3,26 @@ const { Raza, Temperamento } = require("../db.js");
 async function crearRaza(req, res) {
   //req del body
   try {
-    const { name, height, weight, life_span, temperament } = req.body;
-    //crea raza en DB
-    const temperamento = await Temperamento.create({
-      name: temperament,
-    });
+    const {
+      nombre,
+      alturaMax,
+      alturaMin,
+      pesoMax,
+      pesoMin,
+      añosMax,
+      añosMin,
+      temperamentos,
+    } = req.body;
+
     const raza = await Raza.create({
-      id: name,
-      name,
-      height,
-      weight,
-      life_span,
+      id: nombre,
+      name: nombre,
+      height: `${alturaMin} - ${alturaMax}`,
+      weight: `${pesoMin} - ${pesoMax}`,
+      life_span: `${añosMin} - ${añosMax}`,
     });
 
-    await raza.setTemperamentos(temperamento);
+    await raza.setTemperamentos(temperamentos);
 
     if (raza) {
       return res.json({
@@ -25,7 +31,7 @@ async function crearRaza(req, res) {
       });
     }
   } catch (err) {
-    res.status(404);
+    console.log(err);
   }
 }
 

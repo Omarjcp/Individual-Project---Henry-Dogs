@@ -5,7 +5,7 @@ const {
   obtenerDetalleDeRazas,
   obtenerRazasOrdenar,
 } = require("./funciones/razasPrincipal.js");
-const ordenAlfAsc = require("./funciones/ordenar/ordenarAlf");
+const { ordenAlfAsc } = require("./funciones/ordenar/ordenarAlf");
 const filtradoNombre = require("./funciones/utils/filtradoNombre");
 const divicionDePagina = require("./funciones/utils/divicionPag");
 const {

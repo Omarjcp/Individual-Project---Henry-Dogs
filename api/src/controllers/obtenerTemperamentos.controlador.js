@@ -1,7 +1,7 @@
 const axios = require("axios");
 const { Temperamento } = require("../db.js");
 
-async function obtenerTemperamento(req, res) {
+async function temperamentosDeApi(req, res) {
   try {
     let { data } = await axios(`https://api.thedogapi.com/v1/breeds`);
 
@@ -26,26 +26,38 @@ async function obtenerTemperamento(req, res) {
       }
       return temp;
     }, []);
-
+    let tempDb;
     //crea los temperamentos en la db segun los que optenga de la api
     for (let i = 0; i < result.length; i++) {
-      await Temperamento.create({
+      tempDb = await Temperamento.create({
         name: result[i],
       });
     }
 
+    // let temperamentosDb = await Temperamento.findAll();
+
+    // //elimina la repeticion en cada render
+    // let tempFiltrados = temperamentosDb.reduce((temp, { name, id }) => {
+    //   if (!temp.includes(name)) {
+    //     temp.push(name);
+    //   }
+    //   return temp;
+    // }, []);
+
+    // return tempFiltrados;
+    if (tempDb) return res.json({ msg: "ok" });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function obtenerTemperamento(req, res) {
+  try {
     let temperamentosDb = await Temperamento.findAll();
 
-    let tempFiltrados = temperamentosDb.reduce((temp, { name }) => {
-      if (!temp.includes(name)) {
-        temp.push(name);
-      }
-      return temp;
-    }, []);
-
-    if (tempFiltrados) {
+    if (temperamentosDb) {
       res.json({
-        data: tempFiltrados,
+        data: temperamentosDb,
       });
     }
   } catch (err) {
@@ -53,4 +65,7 @@ async function obtenerTemperamento(req, res) {
   }
 }
 
-module.exports = obtenerTemperamento;
+module.exports = {
+  obtenerTemperamento,
+  temperamentosDeApi,
+};

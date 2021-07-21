@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { Raza, Temperamento } = require("../db");
-const ordenAlfAsc = require("./funciones/ordenar/ordenarAlf");
+const { ordenAlfAsc } = require("./funciones/ordenar/ordenarAlf");
 const {
   ordenarPesoDes,
   ordenarPesoAsc,
@@ -22,14 +22,23 @@ async function obtenerPorTemperamento(req, res) {
     if (temper) {
       //filtro las razas que tienen algun temperamento
       let razasConTemp = todasRazas.filter((raza) => {
-        if (raza.temperaments) return raza;
+        if (raza.temperaments) {
+          return raza;
+        } else if (Array.isArray(raza.temperamentos)) {
+          //creo la propiedad temperaments en la raza creada para poder tratarla
+          raza["temperaments"] = raza.temperamentos.map((temp) => {
+            return temp.name;
+          });
+          raza["temperaments"] = raza["temperaments"].join(", ");
+          return raza;
+        }
       });
 
-      //convierto los temperamentos en un array
       let razas = razasConTemp.filter((raza) => {
+        //convierto los temperamentos en array
         let temperamentoDeRaza = raza.temperaments.toLowerCase().split(", ");
         //si el array de temperamentos incluye la palabra pasada por query, la retorna
-        if (temperamentoDeRaza.includes(temper)) return raza;
+        if (temperamentoDeRaza?.includes(temper)) return raza;
       });
 
       if (orden === "1") {

@@ -17,4 +17,24 @@ async function ordenAlfAsc(razasAsc) {
   return orden;
 }
 
-module.exports = ordenAlfAsc;
+async function ordenAlfDes(razasDes) {
+  let orden = razasDes.sort((a, b) => {
+    let nombreA = a.name.toLowerCase();
+    let nombreB = b.name.toLowerCase();
+
+    if (nombreA < nombreB) {
+      return -1;
+    }
+
+    if (nombreA > nombreB) {
+      return 1;
+    }
+    return 0;
+  });
+  return orden;
+}
+
+module.exports = {
+  ordenAlfAsc,
+  ordenAlfDes,
+};
