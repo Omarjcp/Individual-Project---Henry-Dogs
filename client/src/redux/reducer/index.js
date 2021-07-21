@@ -15,10 +15,16 @@ const estadoInicial = {
   temperamentos: [],
   razaId: {},
   busqueda: "",
+  msg: "",
 };
 
 export default function rootReducer(state = estadoInicial, action) {
   switch (action.type) {
+    case CREAR_RAZA:
+      return {
+        ...state,
+        msg: "cargado correctamente..",
+      };
     case OBTENER_RAZAS:
       return {
         ...state,

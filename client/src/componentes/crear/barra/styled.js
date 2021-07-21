@@ -5,7 +5,7 @@ export const DivContainer = styled.div`
   display: flex;
   height: 13rem;
   width: 100vw;
-  background-color: blue;
+  background-color: grey;
   margin: 0;
   position: fixed;
   opacity: 0.8;

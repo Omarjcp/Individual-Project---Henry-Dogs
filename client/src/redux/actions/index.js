@@ -124,11 +124,12 @@ export function obtenerParaOrdenar(orden, pag) {
   };
 }
 
-export function crearRaza(data) {
+export function crearRaza(payload) {
+  console.log(payload);
   return async function (dispatch) {
     try {
-      const nuevaRaza = await axios.post("http://localhost:3001/dog", data);
-      return dispatch({ type: CREAR_RAZA, payload: nuevaRaza });
+      const { data } = await axios.post("http://localhost:3001/dog", payload);
+      return dispatch({ type: CREAR_RAZA, payload: data });
     } catch (err) {
       console.log(err);
     }

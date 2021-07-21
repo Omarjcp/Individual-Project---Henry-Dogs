@@ -10,6 +10,7 @@ import {
 } from "./styled";
 
 export const Raza = ({ razas }) => {
+  console.log(razas);
   return (
     <>
       <DivRazas>
@@ -17,10 +18,16 @@ export const Raza = ({ razas }) => {
           <DivContenedorRaza>
             <NombreRaza>{raza.name}</NombreRaza>
 
-            <Img src={raza.image} alt={`Imagen de Un ${raza.name}`} />
+            <Img src={raza.image} alt={`Imagen de un ${raza.name}`} />
 
             <Temperamentos>
-              <NombresTemperamentos>{raza.temperaments}</NombresTemperamentos>
+              <NombresTemperamentos>
+                {Array.isArray(raza.temperamentos)
+                  ? raza.temperamentos.map((temp) => (
+                      <label>{temp.name}, </label>
+                    ))
+                  : raza.temperaments}
+              </NombresTemperamentos>
             </Temperamentos>
 
             <Link to={`/raza/${raza.id}`} style={{ textDecoration: "none" }}>

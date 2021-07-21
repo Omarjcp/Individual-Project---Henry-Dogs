@@ -27,7 +27,7 @@ export const RazasFiltrar = ({ todasRazas, setPagina }) => {
       }}
     >
       <select onChange={handlerSelect}>
-        <option disabled selected>
+        <option disabled selected hidden>
           Razas
         </option>
         <option value="todos">Todos</option>

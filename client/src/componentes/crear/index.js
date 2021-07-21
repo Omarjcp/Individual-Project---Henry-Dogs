@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./validaciones/validaciones";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Barra } from "./barra/index";
 import {
@@ -12,9 +13,18 @@ import {
   DivInputMinMax,
   InputN,
 } from "./styled";
-import { Link } from "react-router-dom";
+import { crearRaza, obtenerTemperamentos } from "../../redux/actions";
+import { useEffect } from "react";
+// import { Link } from "react-router-dom";
 
 export const NuevaRaza = () => {
+  const dispatch = useDispatch();
+  let { temperamentos, msg } = useSelector((state) => state);
+
+  useEffect(() => {
+    dispatch(obtenerTemperamentos());
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -23,8 +33,9 @@ export const NuevaRaza = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    await dispatch(crearRaza(data));
+    msg && alert(msg);
   };
 
   return (
@@ -45,7 +56,7 @@ export const NuevaRaza = () => {
             </DivInput>
             <hr />
             <DivInput>
-              <label>Altura min - max</label>
+              <label>Altura</label>
               <DivInputMinMax>
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <span>min</span>
@@ -137,14 +148,28 @@ export const NuevaRaza = () => {
 
             <DivInput>
               <label>Temperamentos</label>
-              <select name="temperamentos" multiple>
+              <span style={{ fontSize: ".8rem" }}>
+                <br />
+                <i>
+                  para seleccionar multiples temperamentos, debes presionar
+                  <br />
+                  la tecla ctrl junto con un click
+                </i>
+              </span>
+              <select
+                name="temperamentos[]"
+                multiple
+                required
+                {...register("temperamentos[]")}
+              >
                 <option disabled selected>
                   Elige el/los temperamentos
                 </option>
-                <option>bravo</option>
-                <option>bravo</option>
-                <option>bravo</option>
-                <option>bravo</option>
+                {temperamentos.map((temperamento) => {
+                  return (
+                    <option value={temperamento.id}>{temperamento.name}</option>
+                  );
+                })}
               </select>
             </DivInput>
 
