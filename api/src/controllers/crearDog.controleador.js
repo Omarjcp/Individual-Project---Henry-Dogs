@@ -14,21 +14,27 @@ async function crearRaza(req, res) {
       temperamentos,
     } = req.body;
 
-    const raza = await Raza.create({
-      id: nombre,
-      name: nombre,
-      height: `${alturaMin} - ${alturaMax}`,
-      weight: `${pesoMin} - ${pesoMax}`,
-      life_span: `${añosMin} - ${añosMax}`,
-    });
-
-    await raza.setTemperamentos(temperamentos);
-
-    if (raza) {
+    const razaDb = await Raza.findByPk(nombre);
+    if (razaDb) {
       return res.json({
-        message: "perro creado correctamente",
-        data: raza,
+        message: "Raza de perro ya existente",
       });
+    } else {
+      const raza = await Raza.create({
+        id: nombre,
+        name: nombre,
+        height: `${alturaMin} - ${alturaMax}`,
+        weight: `${pesoMin} - ${pesoMax}`,
+        life_span: `${añosMin} - ${añosMax}`,
+      });
+
+      await raza.setTemperamentos(temperamentos);
+
+      if (raza) {
+        return res.json({
+          message: "perro creado correctamente",
+        });
+      }
     }
   } catch (err) {
     console.log(err);
