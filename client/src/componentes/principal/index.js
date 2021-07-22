@@ -8,7 +8,6 @@ import {
 } from "../../redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import { Paginado } from "./paginado";
 import { Filtrado } from "./filtrado";
 
@@ -16,23 +15,50 @@ import { Filtrado } from "./filtrado";
 
 export const Principal = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   let { razas, todasRazas } = useSelector((state) => state);
   let [orden, setOrden] = useState(false);
   let [pagina, setPagina] = useState(0);
   let [temperam, setTemperam] = useState("");
 
+  let [loading, setLoading] = useState(true);
+
   useEffect(() => {
     dispatch(obtenerPorPag(0));
     dispatch(obtenerTemperamentos());
     dispatch(obtenerRazas());
+
+    setLoading(false);
   }, []);
 
+  console.log(loading);
+
+  if (loading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          width: "15rem",
+          height: "100%",
+          paddingBottom: "10px",
+          marginTop: "5rem",
+        }}
+      >
+        <h1>CARGANDO...</h1>
+      </div>
+    );
+  }
   return (
-    <div>
+    <div
+      style={{
+        background:
+          "linear-gradient(90deg, rgba(0,203,169,1) 0%, rgba(83,152,140,1) 50%, rgba(0,203,169,1) 100%)",
+      }}
+    >
       <Navbar setPagina={setPagina} setTemperam={setTemperam} />
 
-      <div style={{ marginTop: "5rem" }}>
+      <div style={{ marginTop: "3.7rem", padding: "1rem" }}>
         <Select pagina={pagina} setOrden={setOrden} temperam={temperam} />
       </div>
 
@@ -42,12 +68,11 @@ export const Principal = () => {
           setPagina={setPagina}
           setTemperam={setTemperam}
         />
-
         <Raza razas={razas} />
       </div>
 
       <div
-        style={{ display: "flex", justifyContent: "center", margin: "2rem" }}
+        style={{ display: "flex", justifyContent: "center", padding: "2rem" }}
       >
         <Paginado setPagina={setPagina} orden={orden} temperam={temperam} />
       </div>

@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { obtenerPorTemperamento } from "../../../../redux/actions";
+import { Select, Opciones } from "./styled";
 
 export const TempFiltrar = ({ setPagina, setTemperam }) => {
   const dispatch = useDispatch();
@@ -26,15 +27,17 @@ export const TempFiltrar = ({ setPagina, setTemperam }) => {
         height: "10vh",
       }}
     >
-      <select onChange={handlerSelect}>
+      <Select onChange={handlerSelect}>
         <option disabled selected hidden>
           Temperamentos
         </option>
-        <option value="todos">Todos</option>
+        <Opciones value="todos">Todos</Opciones>
         {temperamentos.map((temperamento) => {
-          return <option value={temperamento.name}>{temperamento.name}</option>;
+          return (
+            <Opciones value={temperamento.name}>{temperamento.name}</Opciones>
+          );
         })}
-      </select>
+      </Select>
     </div>
   );
 };

@@ -5,6 +5,7 @@ import {
   obtenerPorPag,
   obtenerPorTemperamento,
 } from "../../../redux/actions";
+import { SelectInput, Opciones } from "./styled";
 
 export const Select = ({ pagina, setOrden, temperam }) => {
   let { busqueda } = useSelector((state) => state);
@@ -98,22 +99,18 @@ export const Select = ({ pagina, setOrden, temperam }) => {
       style={{
         display: "flex",
         justifyContent: "flex-end",
-        width: "90%",
+        width: "95%",
       }}
     >
-      <select
-        name="filtrado"
-        onChange={handlerSelect}
-        style={{ width: "12rem", height: "1.5rem" }}
-      >
-        <option disabled selected>
+      <SelectInput name="filtrado" onChange={handlerSelect}>
+        <option disabled selected hidden>
           Ordenar por
         </option>
-        <option value="1">Mayor peso</option>
-        <option value="2">Menor peso</option>
-        <option value="3">Raza A-Z</option>
-        <option value="4">Raza Z-A</option>
-      </select>
+        <Opciones value="1">Mayor peso</Opciones>
+        <Opciones value="2">Menor peso</Opciones>
+        <Opciones value="3">Raza A-Z</Opciones>
+        <Opciones value="4">Raza Z-A</Opciones>
+      </SelectInput>
     </div>
   );
 };

@@ -12,14 +12,17 @@ import {
   SpanError,
   DivInputMinMax,
   InputN,
+  InputSubmit,
 } from "./styled";
 import { crearRaza, obtenerTemperamentos } from "../../redux/actions";
 import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 export const NuevaRaza = () => {
   const dispatch = useDispatch();
   let { temperamentos, msg } = useSelector((state) => state);
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(obtenerTemperamentos());
@@ -33,16 +36,28 @@ export const NuevaRaza = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data) => {
-    await dispatch(crearRaza(data));
-    msg && alert(msg);
+  const onSubmit = (data) => {
+    dispatch(crearRaza(data));
   };
+
+  useEffect(() => {
+    if (msg) {
+      alert(msg);
+      history.go(0);
+    }
+  }, [msg]);
 
   return (
     <>
       <Barra />
 
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          background: "#00cba9",
+        }}
+      >
         <DivContainer>
           <form onSubmit={handleSubmit(onSubmit)}>
             <DivInput>
@@ -176,7 +191,7 @@ export const NuevaRaza = () => {
             <hr />
 
             <DivInput>
-              <input type="submit" />
+              <InputSubmit type="submit" />
             </DivInput>
           </form>
         </DivContainer>

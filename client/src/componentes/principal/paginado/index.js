@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Boton } from "./boton";
+import { Boton } from "./boton/index";
 
 export const Paginado = ({ setPagina, orden, temperam }) => {
   let { longitud } = useSelector((state) => state);

@@ -4,14 +4,16 @@ import {
   obtenerPorNombre,
   obtenerPorPag,
   obtenerPorTemperamento,
-} from "../../../redux/actions";
+} from "../../../../redux/actions";
+
+import { BotonPag } from "./styled";
 
 export const Boton = ({ setPagina, orden, pag, i, temperam }) => {
   let { busqueda } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   return (
-    <button
+    <BotonPag
       onClick={() => {
         setPagina(i);
         if (busqueda && !temperam) {
@@ -48,6 +50,6 @@ export const Boton = ({ setPagina, orden, pag, i, temperam }) => {
       }}
     >
       {pag}
-    </button>
+    </BotonPag>
   );
 };

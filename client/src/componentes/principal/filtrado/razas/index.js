@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { obtenerPorNombre } from "../../../../redux/actions";
+import { Opciones, Select } from "./styled";
 
 export const RazasFiltrar = ({ todasRazas, setPagina }) => {
   const history = useHistory();
@@ -26,15 +27,15 @@ export const RazasFiltrar = ({ todasRazas, setPagina }) => {
         marginTop: "1rem",
       }}
     >
-      <select onChange={handlerSelect}>
+      <Select onChange={handlerSelect}>
         <option disabled selected hidden>
           Razas
         </option>
-        <option value="todos">Todos</option>
+        <Opciones value="todos">Todos</Opciones>
         {todasRazas.map((raza, i) => {
-          return <option value={raza.name}>{raza.name}</option>;
+          return <Opciones value={raza.name}>{raza.name}</Opciones>;
         })}
-      </select>
+      </Select>
     </div>
   );
 };

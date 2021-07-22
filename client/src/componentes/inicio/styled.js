@@ -31,6 +31,7 @@ export const BotonInicio = styled.button`
 
   :hover {
     transform: scale(1.1);
+    transition: all 0.2s ease 0.2s;
   }
   :active {
     background-color: #3e3e3e;

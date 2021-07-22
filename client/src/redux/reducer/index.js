@@ -16,6 +16,7 @@ const estadoInicial = {
   razaId: {},
   busqueda: "",
   msg: "",
+  idState: undefined,
 };
 
 export default function rootReducer(state = estadoInicial, action) {
@@ -23,7 +24,7 @@ export default function rootReducer(state = estadoInicial, action) {
     case CREAR_RAZA:
       return {
         ...state,
-        msg: "cargado correctamente..",
+        msg: action.payload.message,
       };
     case OBTENER_RAZAS:
       return {
@@ -58,6 +59,7 @@ export default function rootReducer(state = estadoInicial, action) {
       return {
         ...state,
         razaId: action.payload[0],
+        idState: action.payload[0].id,
       };
 
     case OBTENER_TEMPERAMENTOS:

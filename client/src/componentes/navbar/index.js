@@ -1,11 +1,19 @@
-import { Img, Linknav, NavB, ContenedorBuscador } from "./styled";
+import {
+  Img,
+  Linknav,
+  NavB,
+  ContenedorBuscador,
+  InputBuscador,
+  BotonBuscador,
+} from "./styled";
 import Icono from "./iconsmall.png";
 import { obtenerPorNombre } from "../../redux/actions";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 
-export const Navbar = ({ setPagina, setTemperam }) => {
+export const Navbar = ({ setPagina }) => {
+  let location = useLocation();
   const dispatch = useDispatch();
   let [perros, setPerros] = useState("");
   const history = useHistory();
@@ -26,7 +34,11 @@ export const Navbar = ({ setPagina, setTemperam }) => {
   };
 
   function regresar() {
-    history.push("/principal");
+    if (location.pathname === "/principal") {
+      history.go(0);
+    } else {
+      history.push("/principal");
+    }
   }
 
   return (
@@ -47,7 +59,7 @@ export const Navbar = ({ setPagina, setTemperam }) => {
 
         <ContenedorBuscador>
           <form onSubmit={onSubmit}>
-            <input
+            <InputBuscador
               type="search"
               placeholder="Buscar por raza..."
               value={perros}
@@ -55,11 +67,11 @@ export const Navbar = ({ setPagina, setTemperam }) => {
             />
 
             {perros ? (
-              <button type="submit">Buscar</button>
+              <BotonBuscador type="submit">Buscar</BotonBuscador>
             ) : (
-              <button type="submit" disabled>
+              <BotonBuscador type="submit" disabled>
                 Buscar
-              </button>
+              </BotonBuscador>
             )}
           </form>
         </ContenedorBuscador>

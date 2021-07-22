@@ -18,6 +18,13 @@ export const DivContenedorRaza = styled.div`
   width: 15rem;
   margin: 0.6rem;
   background-color: #d1d1d1;
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border-radius: 10px;
+  :hover {
+    transform: skew(2deg, 2deg);
+    transition: all 0.3s ease;
+  }
 `;
 
 export const Img = styled.img`
@@ -35,7 +42,6 @@ export const NombreRaza = styled.div`
   font-family: cursive;
   font-weight: 600;
   letter-spacing: 1px;
-  background-color: lightgray;
 `;
 
 export const Temperamentos = styled.div`

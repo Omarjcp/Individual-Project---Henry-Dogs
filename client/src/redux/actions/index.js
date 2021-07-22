@@ -125,7 +125,6 @@ export function obtenerParaOrdenar(orden, pag) {
 }
 
 export function crearRaza(payload) {
-  console.log(payload);
   return async function (dispatch) {
     try {
       const { data } = await axios.post("http://localhost:3001/dog", payload);
