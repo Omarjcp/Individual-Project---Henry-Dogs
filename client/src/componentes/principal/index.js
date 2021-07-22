@@ -12,6 +12,7 @@ import { Paginado } from "./paginado";
 import { Filtrado } from "./filtrado";
 
 import { DivContenedor } from "./styled";
+import { Loading } from "../loader/loading";
 
 export const Principal = () => {
   const dispatch = useDispatch();
@@ -32,19 +33,20 @@ export const Principal = () => {
 
   if (loading) {
     return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-          width: "15rem",
-          height: "100%",
-          paddingBottom: "10px",
-          marginTop: "5rem",
-        }}
-      >
-        <h1>CARGANDO...</h1>
-      </div>
+      <Loading />
+      // <div
+      //   style={{
+      //     display: "flex",
+      //     alignItems: "center",
+      //     flexDirection: "column",
+      //     width: "15rem",
+      //     height: "100%",
+      //     paddingBottom: "10px",
+      //     marginTop: "5rem",
+      //   }}
+      // >
+      //   <h1>CARGANDO...</h1>
+      // </div>
     );
   }
   return (

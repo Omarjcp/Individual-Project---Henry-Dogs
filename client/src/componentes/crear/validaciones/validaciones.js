@@ -7,8 +7,8 @@ export const schema = yup.object().shape({
   nombre: yup
     .string()
     .required("*Este campo es requerido")
-    .min(3, "*Deben ser mas de 2 caracteres")
-    .matches(soloLetras, "*Debe solo letras"),
+    .min(3, "*Deben ser mas de 2 letras")
+    .matches(soloLetras, "*Debe ser solo letras"),
 
   alturaMin: yup
     .string()

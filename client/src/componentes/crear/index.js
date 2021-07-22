@@ -172,9 +172,9 @@ export const NuevaRaza = () => {
                 </i>
               </span>
               <select
+                required
                 name="temperamentos[]"
                 multiple
-                required
                 {...register("temperamentos[]")}
               >
                 <option disabled selected>
@@ -186,6 +186,9 @@ export const NuevaRaza = () => {
                   );
                 })}
               </select>
+              <SpanError>
+                {errors.temperamentos && errors.temperamentos.message}
+              </SpanError>
             </DivInput>
 
             <hr />

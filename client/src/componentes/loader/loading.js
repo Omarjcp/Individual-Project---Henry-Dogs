@@ -12,7 +12,7 @@ export const Loading = () => {
       }}
     >
       <img src="https://i.gifer.com/YzDQ.gif" width="200" height="200" />
-      <h3 style={{ color: "white" }}>CARGANDO...</h3>
+      <h3 style={{ color: "green" }}>CARGANDO...</h3>
     </div>
   );
 };
