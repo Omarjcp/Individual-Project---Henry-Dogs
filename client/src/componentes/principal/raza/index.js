@@ -8,6 +8,7 @@ import {
   NombresTemperamentos,
   BotonDetalles,
 } from "./styled";
+import ImagenAvatar from "../../detalles/avatarPerro.png";
 
 export const Raza = ({ razas }) => {
   return (
@@ -17,7 +18,10 @@ export const Raza = ({ razas }) => {
           <DivContenedorRaza>
             <NombreRaza>{raza.name}</NombreRaza>
 
-            <Img src={raza.image} alt={`Imagen de un ${raza.name}`} />
+            <Img
+              src={raza.image ? raza.image : ImagenAvatar}
+              alt={`Imagen de un ${raza.name}`}
+            />
 
             <Temperamentos>
               <NombresTemperamentos>

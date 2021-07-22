@@ -2,12 +2,20 @@ import styled from "styled-components";
 
 export const Select = styled.select`
   height: 1.5rem;
-  background-color: transparent;
-  border-radius: 2px;
-  border: none;
-  box-shadow: 1px 1px 1px black;
+  background: rgba(0, 0, 0, 0.75);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   outline: none;
   overflow: auto;
+  border-radius: 3px;
+  color: white;
+
+  :hover {
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: black;
+  }
 
   ::-webkit-scrollbar {
     width: 8px;

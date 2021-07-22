@@ -38,6 +38,7 @@ export const Navbar = ({ setPagina }) => {
       history.go(0);
     } else {
       history.push("/principal");
+      history.go(0);
     }
   }
 

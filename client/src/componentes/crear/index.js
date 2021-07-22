@@ -55,7 +55,7 @@ export const NuevaRaza = () => {
         style={{
           display: "flex",
           justifyContent: "center",
-          background: "#00cba9",
+          background: "#A5AAFF",
         }}
       >
         <DivContainer>

@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Navbar } from "../navbar";
 import { Loading } from "../loader/loading";
+import { Contenedor, DivTarjeta } from "./styled";
+import AvatarImagen from "./avatarPerro.png";
 
 export const Detalle = () => {
   let { id } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-  const { razaId, idState } = useSelector((state) => state);
+  let { razaId, idState, busqueda } = useSelector((state) => state);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -17,43 +19,35 @@ export const Detalle = () => {
   }, [id]);
 
   useEffect(() => {
-    if (idState === Number(id)) setLoading(false);
+    if (idState == id) setLoading(false);
   }, [idState]);
 
-  function regresar() {
-    history.replace("/principal");
-  }
-
   return (
-    <div>
-      <Navbar path={regresar} />
+    <Contenedor>
+      <Navbar />
 
       {loading ? (
         <Loading />
       ) : (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "column",
-            border: "1px solid black",
-            width: "15rem",
-            paddingBottom: "10px",
-            marginTop: "5rem",
-          }}
-        >
-          <div>
-            <h3>{razaId.name}</h3>
+        <DivTarjeta>
+          <h3 style={{ margin: "10px" }}>{razaId.name}</h3>
+          <div style={{ width: "13rem", height: "12rem" }}>
+            <img
+              src={`${razaId.image ? razaId.image : AvatarImagen}`}
+              alt={`imagen de un ${razaId.name}`}
+              style={{
+                height: "100%",
+                width: "100%",
+                borderRadius: "80% 4% 80% 8% / 8% 86% 14% 92% ",
+              }}
+            />
           </div>
-          <img
-            src={`${razaId.image}`}
-            style={{ height: "12rem", width: "15rem" }}
-          />
-          <div>
+
+          <div style={{ marginLeft: ".5rem" }}>
             {Array.isArray(razaId.temperamentos) ? (
               razaId.temperamentos.map((temp) => <span>{temp.name}, </span>)
             ) : (
-              <span>{razaId.temperaments}</span>
+              <p>{razaId.temperaments}</p>
             )}
           </div>
           <div style={{ display: "flex", flexDirection: "row" }}>
@@ -85,15 +79,13 @@ export const Detalle = () => {
           </div>
           <span>{razaId.weight} kg</span>
           <div style={{ display: "flex", flexDirection: "row" }}>
-            <div style={{ marginRight: "1rem" }}>
-              <b>
-                <label>Años de vida</label>
-              </b>
-            </div>
+            <b>
+              <label style={{ marginRight: "1rem" }}>Años de vida</label>
+            </b>
           </div>
           <span>{razaId.life_span}</span>
-        </div>
+        </DivTarjeta>
       )}
-    </div>
+    </Contenedor>
   );
 };

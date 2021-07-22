@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { Paginado } from "./paginado";
 import { Filtrado } from "./filtrado";
 
-// import { } from "./styled";
+import { DivContenedor } from "./styled";
 
 export const Principal = () => {
   const dispatch = useDispatch();
@@ -29,8 +29,6 @@ export const Principal = () => {
 
     setLoading(false);
   }, []);
-
-  console.log(loading);
 
   if (loading) {
     return (
@@ -50,13 +48,8 @@ export const Principal = () => {
     );
   }
   return (
-    <div
-      style={{
-        background:
-          "linear-gradient(90deg, rgba(0,203,169,1) 0%, rgba(83,152,140,1) 50%, rgba(0,203,169,1) 100%)",
-      }}
-    >
-      <Navbar setPagina={setPagina} setTemperam={setTemperam} />
+    <DivContenedor>
+      <Navbar setPagina={setPagina} />
 
       <div style={{ marginTop: "3.7rem", padding: "1rem" }}>
         <Select pagina={pagina} setOrden={setOrden} temperam={temperam} />
@@ -76,6 +69,6 @@ export const Principal = () => {
       >
         <Paginado setPagina={setPagina} orden={orden} temperam={temperam} />
       </div>
-    </div>
+    </DivContenedor>
   );
 };
