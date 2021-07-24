@@ -24,7 +24,8 @@ async function crearRaza(req, res) {
       !añosMin
     ) {
       return res.status(404).json({
-        message: "Todos los campos son obligatorios",
+        message:
+          "Todos los campos son obligatorios (a excepción del temperamento)",
       });
     }
 

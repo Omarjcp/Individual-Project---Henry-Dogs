@@ -16,15 +16,74 @@ const dog = {
   temperamentos: ["1", "2"],
 };
 
-describe("Videogame routes", () => {
+describe("Ruta de creacion de nueva raza", () => {
   describe("POST /dog", () => {
-    it("la respuesta debe ser de tipo object y la propiedad message debe ser de tipo string", () =>
+    it("la respuesta debe ser de tipo object", () =>
       agent
         .post("/dog")
         .send(dog)
         .then((res) => {
           expect(res.body).to.be.an("object");
+        }));
+
+    it("La propiedad message de la respuesta debe ser de tipo string", () =>
+      agent
+        .post("/dog")
+        .send(dog)
+        .then((res) => {
           expect(res.body.message).to.be.a("string");
+        }));
+
+    it("Si falta al menos un campo (a excepción del temperamento), responde con un msj adecuado", () =>
+      agent
+        .post("/dog")
+        .send({
+          alturaMax: "20",
+          alturaMin: "15",
+          pesoMax: "10",
+          pesoMin: "5",
+          añosMax: "10",
+          añosMin: "12",
+          temperamentos: ["1", "2"],
+        })
+        .then((res) => {
+          expect(res.body.message).to.be.equal(
+            "Todos los campos son obligatorios (a excepción del temperamento)"
+          );
+        }));
+
+    it("Si no recibe ningún campo, responde con un msj adecuado", () =>
+      agent
+        .post("/dog")
+        .send({})
+        .then((res) => {
+          expect(res.body.message).to.be.equal(
+            "Todos los campos son obligatorios (a excepción del temperamento)"
+          );
+        }));
+
+    it("Si falta al menos un campo (a excepción del temperamento), responde con status 404", () =>
+      agent
+        .post("/dog")
+        .send({
+          nombre: "naranja",
+          alturaMax: "20",
+          alturaMin: "15",
+          pesoMax: "10",
+          pesoMin: "5",
+          añosMax: "10",
+          añosMin: "12",
+        })
+        .then((res) => {
+          expect(res.status).to.be.equal(404);
+        }));
+
+    it("Si faltan todos los campos, responde con status 404", () =>
+      agent
+        .post("/dog")
+        .send({})
+        .then((res) => {
+          expect(res.status).to.be.equal(404);
         }));
   });
 });
