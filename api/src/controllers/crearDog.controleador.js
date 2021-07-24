@@ -14,6 +14,20 @@ async function crearRaza(req, res) {
       temperamentos,
     } = req.body;
 
+    if (
+      !nombre ||
+      !alturaMax ||
+      !alturaMin ||
+      !pesoMax ||
+      !pesoMin ||
+      !añosMax ||
+      !añosMin
+    ) {
+      return res.status(404).json({
+        message: "Todos los campos son obligatorios",
+      });
+    }
+
     const razaDb = await Raza.findByPk(nombre);
     if (razaDb) {
       return res.json({
@@ -28,7 +42,13 @@ async function crearRaza(req, res) {
         life_span: `${añosMin} - ${añosMax}`,
       });
 
-      await raza.setTemperamentos(temperamentos);
+      if (raza && temperamentos.length > 0) {
+        await raza.setTemperamentos(temperamentos);
+
+        return res.json({
+          message: "perro creado correctamente",
+        });
+      }
 
       if (raza) {
         return res.json({
