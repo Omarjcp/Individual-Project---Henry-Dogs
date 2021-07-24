@@ -172,12 +172,11 @@ export const NuevaRaza = () => {
                 </i>
               </span>
               <select
-                required
                 name="temperamentos[]"
                 multiple
                 {...register("temperamentos[]")}
               >
-                <option disabled selected>
+                <option disabled hidden>
                   Elige el/los temperamentos
                 </option>
                 {temperamentos.map((temperamento) => {
