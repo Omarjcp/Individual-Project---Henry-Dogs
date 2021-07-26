@@ -1,21 +1,45 @@
-const { Dog, conn } = require('../../src/db.js');
-const { expect } = require('chai');
+const { Raza, conn } = require("../../src/db.js");
+const { expect } = require("chai").expect;
 
-describe('Dog model', () => {
-  before(() => conn.authenticate()
-    .catch((err) => {
-      console.error('Unable to connect to the database:', err);
-    }));
-  describe('Validators', () => {
-    beforeEach(() => Dog.sync({ force: true }));
-    describe('name', () => {
-      it('should throw an error if name is null', (done) => {
-        Dog.create({})
-          .then(() => done(new Error('It requires a valid name')))
+describe("Tests de Modelos", () => {
+  before(() =>
+    conn.authenticate().catch((err) => {
+      console.error("Error en la coneccion a la db:", err);
+    })
+  );
+  describe("Validadores", () => {
+    beforeEach(() => Raza.sync({ force: true }));
+    describe("Modelo Raza", () => {
+      it("Error en caso que falte el campo name", (done) => {
+        Raza.create({
+          height: "20 - 25",
+          weight: "10 - 14",
+        })
+          .then(() => done(new Error("El nombre de la raza es requerida")))
           .catch(() => done());
       });
-      it('should work when its a valid name', () => {
-        Dog.create({ name: 'Pug' });
+
+      it("Error en caso que falte el campo height", (done) => {
+        Raza.create({
+          name: "omar",
+          weight: "5 - 10",
+        })
+          .then(() => done(new Error("La altura de la raza es requerida")))
+          .catch(() => done());
+      });
+
+      it("Error en caso que falte el campo weight", (done) => {
+        Raza.create({
+          name: "omar",
+          height: "20 - 25",
+        })
+          .then(() => done(new Error("El peso de la raza es requerida")))
+          .catch(() => done());
+      });
+      it("Error en caso que falten todos los campos", (done) => {
+        Raza.create({})
+          .then(() => done(new Error("Todos los campos son requeridos")))
+          .catch(() => done());
       });
     });
   });
