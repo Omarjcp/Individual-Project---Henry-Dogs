@@ -1,7 +1,7 @@
 import { obtenerPorId } from "../../redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Navbar } from "../navbar";
 import { Loading } from "../loader/loading";
 import { Contenedor, DivTarjeta } from "./styled";
@@ -9,9 +9,8 @@ import AvatarImagen from "./avatarPerro.png";
 
 export const Detalle = () => {
   let { id } = useParams();
-  const history = useHistory();
   const dispatch = useDispatch();
-  let { razaId, idState, busqueda } = useSelector((state) => state);
+  let { razaId, idState } = useSelector((state) => state);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

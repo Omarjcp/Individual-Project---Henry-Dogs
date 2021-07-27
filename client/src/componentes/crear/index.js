@@ -17,7 +17,6 @@ import {
 import { crearRaza, obtenerTemperamentos } from "../../redux/actions";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-// import { Link } from "react-router-dom";
 
 export const NuevaRaza = () => {
   const dispatch = useDispatch();
