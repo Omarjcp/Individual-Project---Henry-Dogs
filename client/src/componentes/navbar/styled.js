@@ -19,6 +19,22 @@ export const Linknav = styled(Link)`
   }
 `;
 
+export const Linknavbar = styled.button`
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #fafafa;
+  font-size: 1.15rem;
+  padding: 0.4rem;
+  &:hover {
+    color: #9681ff;
+    font-size: 1.18rem;
+    text-shadow: 1px 1px 1px black;
+    cursor: pointer;
+  }
+`;
+
 export const NavB = styled.nav`
   display: flex;
   justify-content: space-between;
@@ -47,7 +63,10 @@ export const BotonBuscador = styled.button`
   height: 1.5rem;
   border-radius: 2px;
   background: linear-gradient(145deg, #ffffff, #cfcfcf);
-  box-shadow: 27px 27px 55px #787878, -27px -27px 55px #ffffff;
   border: 0.5px solid #9681ff;
   margin-left: 2px;
+
+  &:active {
+    cursor: grabbing;
+  }
 `;

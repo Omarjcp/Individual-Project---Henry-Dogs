@@ -35,15 +35,19 @@ test("Existe placeholder 'Buscar por raza...' en el componente Navbar", () => {
   expect(screen.getByPlaceholderText("Buscar por raza..."));
 });
 
-test("Renderiza el formulario y verificar que exista un label 'Nombre'", () => {
+test("Renderiza el formulario y verificar que exista un label 'Nombre', 'Altura', 'Peso', 'Años de vida' y 'Temperamentos'.", () => {
   const history = createMemoryHistory();
   history.push("/crear-raza");
   render(
     <Provider store={store}>
       <Router history={history}>
-        <NuevaRaza />
+        <App />
       </Router>
     </Provider>
   );
   expect(screen.getByLabelText("Nombre"));
+  expect(screen.getByLabelText("Altura"));
+  expect(screen.getByLabelText("Peso"));
+  expect(screen.getByLabelText("Años de vida"));
+  expect(screen.getByLabelText("Temperamentos"));
 });

@@ -15,7 +15,7 @@ export const Raza = ({ razas }) => {
     <>
       <DivRazas>
         {razas?.map((raza) => (
-          <DivContenedorRaza>
+          <DivContenedorRaza key={raza.id}>
             <NombreRaza>{raza.name}</NombreRaza>
 
             <Img
@@ -26,8 +26,8 @@ export const Raza = ({ razas }) => {
             <Temperamentos>
               <NombresTemperamentos>
                 {Array.isArray(raza.temperamentos)
-                  ? raza.temperamentos.map((temp) => (
-                      <label>{temp.name}, </label>
+                  ? raza.temperamentos.map((temp, i) => (
+                      <label key={i}>{temp.name}, </label>
                     ))
                   : raza.temperaments}
               </NombresTemperamentos>

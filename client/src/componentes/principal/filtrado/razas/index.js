@@ -33,7 +33,11 @@ export const RazasFiltrar = ({ todasRazas, setPagina }) => {
         </option>
         <Opciones value="todos">Todos</Opciones>
         {todasRazas.map((raza, i) => {
-          return <Opciones value={raza.name}>{raza.name}</Opciones>;
+          return (
+            <Opciones key={i} value={raza.name}>
+              {raza.name}
+            </Opciones>
+          );
         })}
       </Select>
     </div>

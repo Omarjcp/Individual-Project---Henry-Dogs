@@ -103,12 +103,13 @@ export const NuevaRaza = () => {
             <hr />
 
             <DivInput>
-              <label>Peso</label>
+              <label htmlFor="pesoMin">Peso</label>
               <DivInputMinMax>
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <span>min</span>
                   <InputMin
                     name="pesoMin"
+                    id="pesoMin"
                     placeholder="min Kg"
                     {...register("pesoMin")}
                   />
@@ -133,12 +134,13 @@ export const NuevaRaza = () => {
             <hr />
 
             <DivInput>
-              <label>Años de vida</label>
+              <label htmlFor="años">Años de vida</label>
               <DivInputMinMax>
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <span>min</span>
                   <InputMin
                     name="añosMin"
+                    id="años"
                     placeholder="min años"
                     {...register("añosMin")}
                   />
@@ -164,7 +166,7 @@ export const NuevaRaza = () => {
             <hr />
 
             <DivInput>
-              <label>Temperamentos</label>
+              <label htmlFor="temp">Temperamentos</label>
               <span style={{ fontSize: ".8rem" }}>
                 <br />
                 <i>
@@ -175,6 +177,7 @@ export const NuevaRaza = () => {
               </span>
               <select
                 name="temperamentos[]"
+                id="temp"
                 multiple
                 {...register("temperamentos[]")}
               >
@@ -183,7 +186,9 @@ export const NuevaRaza = () => {
                 </option>
                 {temperamentos.map((temperamento) => {
                   return (
-                    <option value={temperamento.id}>{temperamento.name}</option>
+                    <option key={temperamento.id} value={temperamento.id}>
+                      {temperamento.name}
+                    </option>
                   );
                 })}
               </select>

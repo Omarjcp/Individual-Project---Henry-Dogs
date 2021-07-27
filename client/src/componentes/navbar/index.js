@@ -5,6 +5,7 @@ import {
   ContenedorBuscador,
   InputBuscador,
   BotonBuscador,
+  Linknavbar,
 } from "./styled";
 import Icono from "./iconsmall.png";
 import { obtenerPorNombre } from "../../redux/actions";
@@ -53,7 +54,7 @@ export const Navbar = ({ setPagina }) => {
           </div>
 
           <div style={{ marginLeft: "2rem" }}>
-            <Linknav onClick={regresar}>Inicio</Linknav>
+            <Linknavbar onClick={regresar}>Inicio</Linknavbar>
             <Linknav to="/crear-raza">Crear Raza</Linknav>
           </div>
         </div>

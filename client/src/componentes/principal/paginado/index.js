@@ -15,6 +15,7 @@ export const Paginado = ({ setPagina, orden, temperam }) => {
     <>
       {arrayPaginas.map((pag, i) => (
         <Boton
+          key={i}
           setPagina={setPagina}
           orden={orden}
           pag={pag}

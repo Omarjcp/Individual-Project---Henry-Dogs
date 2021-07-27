@@ -32,45 +32,31 @@ export const Principal = () => {
   }, []);
 
   if (loading) {
+    return <Loading />;
+  } else {
     return (
-      <Loading />
-      // <div
-      //   style={{
-      //     display: "flex",
-      //     alignItems: "center",
-      //     flexDirection: "column",
-      //     width: "15rem",
-      //     height: "100%",
-      //     paddingBottom: "10px",
-      //     marginTop: "5rem",
-      //   }}
-      // >
-      //   <h1>CARGANDO...</h1>
-      // </div>
+      <DivContenedor>
+        <Navbar setPagina={setPagina} />
+
+        <div style={{ marginTop: "3.7rem", padding: "1rem" }}>
+          <Select pagina={pagina} setOrden={setOrden} temperam={temperam} />
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <Filtrado
+            todasRazas={todasRazas}
+            setPagina={setPagina}
+            setTemperam={setTemperam}
+          />
+          <Raza razas={razas} />
+        </div>
+
+        <div
+          style={{ display: "flex", justifyContent: "center", padding: "2rem" }}
+        >
+          <Paginado setPagina={setPagina} orden={orden} temperam={temperam} />
+        </div>
+      </DivContenedor>
     );
   }
-  return (
-    <DivContenedor>
-      <Navbar setPagina={setPagina} />
-
-      <div style={{ marginTop: "3.7rem", padding: "1rem" }}>
-        <Select pagina={pagina} setOrden={setOrden} temperam={temperam} />
-      </div>
-
-      <div style={{ display: "flex", flexDirection: "row" }}>
-        <Filtrado
-          todasRazas={todasRazas}
-          setPagina={setPagina}
-          setTemperam={setTemperam}
-        />
-        <Raza razas={razas} />
-      </div>
-
-      <div
-        style={{ display: "flex", justifyContent: "center", padding: "2rem" }}
-      >
-        <Paginado setPagina={setPagina} orden={orden} temperam={temperam} />
-      </div>
-    </DivContenedor>
-  );
 };

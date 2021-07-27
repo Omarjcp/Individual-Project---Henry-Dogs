@@ -32,9 +32,11 @@ export const TempFiltrar = ({ setPagina, setTemperam }) => {
           Temperamentos
         </option>
         <Opciones value="todos">Todos</Opciones>
-        {temperamentos.map((temperamento) => {
+        {temperamentos.map((temperamento, i) => {
           return (
-            <Opciones value={temperamento.name}>{temperamento.name}</Opciones>
+            <Opciones key={i} value={temperamento.name}>
+              {temperamento.name}
+            </Opciones>
           );
         })}
       </Select>

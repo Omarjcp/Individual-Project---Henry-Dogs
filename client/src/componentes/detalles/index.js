@@ -45,7 +45,9 @@ export const Detalle = () => {
 
           <div style={{ marginLeft: ".5rem" }}>
             {Array.isArray(razaId.temperamentos) ? (
-              razaId.temperamentos.map((temp) => <span>{temp.name}, </span>)
+              razaId.temperamentos.map((temp, i) => (
+                <span key={i}>{temp.name}, </span>
+              ))
             ) : (
               <p>{razaId.temperaments}</p>
             )}
