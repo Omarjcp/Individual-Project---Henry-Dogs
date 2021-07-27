@@ -1,7 +1,7 @@
 const { Raza, conn } = require("../../src/db.js");
 const { expect } = require("chai").expect;
 
-describe("Tests de Modelos", () => {
+xdescribe("Tests de Modelos", () => {
   before(() =>
     conn.authenticate().catch((err) => {
       console.error("Error en la coneccion a la db:", err);

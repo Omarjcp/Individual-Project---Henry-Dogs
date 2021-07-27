@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 
-const crearRaza = require("../controllers/crearDog.controleador.js");
+const crearRaza = require("../controllers/crearDog.controlador.js");
 
 // Configurar los routers 'dog'
 router.post("/", crearRaza);
