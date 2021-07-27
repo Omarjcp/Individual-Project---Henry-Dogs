@@ -1,4 +1,6 @@
 const { Raza, Temperamento } = require("../db.js");
+const filtradoNombre = require("./funciones/utils/filtradoNombre");
+const { obtenerPrincipalRazas } = require("./funciones/razasPrincipal");
 
 async function crearRaza(req, res) {
   //req del body
@@ -29,8 +31,11 @@ async function crearRaza(req, res) {
       });
     }
 
-    const razaDb = await Raza.findByPk(nombre);
-    if (razaDb) {
+    //todas las razas de db y api
+    let razasDbYApi = await obtenerPrincipalRazas();
+    //busco el nombre del query si coincide con alguna raza ya existente, para evitar su creacion
+    let razasFiltradas = await filtradoNombre(razasDbYApi, nombre);
+    if (razasFiltradas.length > 0) {
       return res.json({
         message: "Raza de perro ya existente",
       });

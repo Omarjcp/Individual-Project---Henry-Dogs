@@ -13,6 +13,7 @@ const {
   ordenarPesoDes,
 } = require("./funciones/ordenar/ordenarPes");
 
+//controlador para ordenado
 async function obtenerOrdenado(req, res) {
   try {
     let { orden, pag } = req.query;
@@ -89,7 +90,7 @@ async function obtenerOrdenado(req, res) {
   }
 }
 
-//8 primeras razas de db y api
+//controlador para busqueda, filtrado por name o primer renderizado
 async function obtenerRazas(req, res) {
   try {
     let { name, pag, orden } = req.query;
@@ -177,7 +178,7 @@ async function obtenerRazas(req, res) {
 
       let longitudRazasFiltradas = razasFiltradas.length;
 
-      //si existe algo en el array filtrado, lo muestra
+      //si existe algo en el array filtrado, lo muestra en caso que no reciba name por query (primer renderizado)
       if (razasFiltradas.length > 0) {
         if (pag) {
           let siguientesOcho = await divicionDePagina(razasFiltradas, pag);
@@ -226,6 +227,7 @@ async function obtenerRazas(req, res) {
   }
 }
 
+//controlador para detalle
 async function obtenerRazaId(req, res) {
   try {
     const { idRaza } = req.params;

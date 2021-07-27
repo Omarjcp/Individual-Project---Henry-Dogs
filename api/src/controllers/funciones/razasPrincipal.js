@@ -29,6 +29,7 @@ async function obtenerPrincipalRazas() {
 
   // concatenacion de ambas peticiones
   let dbApiConcat = razas.concat(razasParaPrincipal);
+  //ordenado por orden alfabetico A-Z
   let arrayOrdenado = await ordenAlfDes(dbApiConcat);
   return arrayOrdenado;
 }
@@ -60,6 +61,7 @@ async function obtenerRazasOrdenar() {
 
   // concatenacion de ambas peticiones
   let dbApiConcat = razas.concat(razasParaPrincipal);
+  //ordenado por orden alfabetico A-Z
   let arrayOrdenado = await ordenAlfDes(dbApiConcat);
   return arrayOrdenado;
 }
