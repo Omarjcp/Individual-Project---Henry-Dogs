@@ -1,7 +1,7 @@
 import * as yup from "yup";
 
 let unNumero = /^[0-9]+$/;
-let soloLetras = /^[A-Z]+$/i;
+let soloLetras = new RegExp("^[a-zA-Z ]+$");
 
 export const schema = yup.object().shape({
   nombre: yup

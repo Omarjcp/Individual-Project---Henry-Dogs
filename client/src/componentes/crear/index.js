@@ -61,9 +61,10 @@ export const NuevaRaza = () => {
         <DivContainer>
           <form onSubmit={handleSubmit(onSubmit)}>
             <DivInput>
-              <label>Nombre</label>
+              <label htmlFor="nombre">Nombre</label>
               <InputN
                 name="nombre"
+                id="nombre"
                 placeholder="nombre de raza"
                 {...register("nombre")}
               />
@@ -71,12 +72,13 @@ export const NuevaRaza = () => {
             </DivInput>
             <hr />
             <DivInput>
-              <label>Altura</label>
+              <label htmlFor="alturaMin">Altura</label>
               <DivInputMinMax>
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <span>min</span>
                   <InputMin
                     name="alturaMin"
+                    id="alturaMin"
                     placeholder="min cm"
                     {...register("alturaMin")}
                   />
