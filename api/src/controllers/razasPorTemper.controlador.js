@@ -29,11 +29,13 @@ async function obtenerPorTemperamento(req, res) {
           raza["temperaments"] = raza.temperamentos.map((temp) => {
             return temp.name;
           });
+          //convierto el array de temperamentos en un string de temperamentos
           raza["temperaments"] = raza["temperaments"].join(", ");
           return raza;
         }
       });
 
+      //busca la raza que incluye el temperamento pasado por query
       let razas = razasConTemp.filter((raza) => {
         //convierto los temperamentos en array
         let temperamentoDeRaza = raza.temperaments.toLowerCase().split(", ");
