@@ -37,14 +37,15 @@ export const NuevaRaza = () => {
 
   const onSubmit = (data) => {
     dispatch(crearRaza(data));
+    console.log(data);
   };
 
-  useEffect(() => {
-    if (msg) {
-      alert(msg);
-      history.go(0);
-    }
-  }, [msg]);
+  // useEffect(() => {
+  //   if (msg) {
+  //     alert(msg);
+  //     history.go(0);
+  //   }
+  // }, [msg]);
 
   return (
     <>
@@ -158,6 +159,22 @@ export const NuevaRaza = () => {
                   <SpanError>
                     {errors.añosMax && errors.añosMax.message}
                   </SpanError>
+                </div>
+              </DivInputMinMax>
+            </DivInput>
+
+            <DivInput>
+              <label htmlFor="url">Imagen</label>
+              <DivInputMinMax>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <span>min</span>
+                  <InputMin
+                    name="url"
+                    id="url"
+                    placeholder="url imagen"
+                    {...register("url")}
+                  />
+                  <SpanError>{errors.url && errors.url.message}</SpanError>
                 </div>
               </DivInputMinMax>
             </DivInput>

@@ -32,7 +32,7 @@ export const Detalle = () => {
           <h3 style={{ margin: "10px" }}>{razaId.name}</h3>
           <div style={{ width: "13rem", height: "12rem" }}>
             <img
-              src={`${razaId.image ? razaId.image : AvatarImagen}`}
+              src={`${razaId.image ? razaId.image : razaId.url}`}
               alt={`imagen de un ${razaId.name}`}
               style={{
                 height: "100%",
