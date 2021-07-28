@@ -196,7 +196,7 @@ async function obtenerRazas(req, res) {
       }
       //si el array esta vacio, error
       else {
-        return res.status(404).json({
+        return res.json({
           message: "raza no encontrada.",
         });
       }
