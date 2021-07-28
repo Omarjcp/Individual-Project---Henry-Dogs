@@ -10,11 +10,12 @@ import {
 import Icono from "./iconsmall.png";
 import { obtenerPorNombre } from "../../redux/actions";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 export const Navbar = ({ setPagina }) => {
   let location = useLocation();
+  let { msg } = useSelector((state) => state);
   const dispatch = useDispatch();
   let [perros, setPerros] = useState("");
   const history = useHistory();
@@ -43,6 +44,13 @@ export const Navbar = ({ setPagina }) => {
     }
   }
 
+  useEffect(() => {
+    if (msg) {
+      alert(msg);
+      history.go(0);
+    }
+  }, [msg]);
+
   return (
     <>
       <NavB>
@@ -68,7 +76,7 @@ export const Navbar = ({ setPagina }) => {
               onChange={handlePerro}
             />
 
-            {perros ? (
+            {perros && location.pathname === "/principal" ? (
               <BotonBuscador type="submit">Buscar</BotonBuscador>
             ) : (
               <BotonBuscador type="submit" disabled>

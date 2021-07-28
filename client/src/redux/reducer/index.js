@@ -46,6 +46,7 @@ export default function rootReducer(state = estadoInicial, action) {
         razas: action.payload.data,
         longitud: action.payload.longitud,
         busqueda: action.payload.busqueda,
+        msg: action.payload.message,
       };
 
     case OBTENER_PARA_ORDENAR:
