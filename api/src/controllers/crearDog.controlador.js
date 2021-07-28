@@ -13,9 +13,10 @@ async function crearRaza(req, res) {
       pesoMin,
       añosMax,
       añosMin,
+      url,
       temperamentos,
     } = req.body;
-
+    console.log(req.body);
     if (
       !nombre ||
       !alturaMax ||
@@ -46,6 +47,7 @@ async function crearRaza(req, res) {
         height: `${alturaMin} - ${alturaMax}`,
         weight: `${pesoMin} - ${pesoMax}`,
         life_span: `${añosMin} - ${añosMax}`,
+        url: "omar",
       });
 
       if (raza && temperamentos.length > 0) {

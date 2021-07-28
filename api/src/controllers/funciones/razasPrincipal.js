@@ -8,7 +8,7 @@ async function obtenerPrincipalRazas() {
 
   //solicitud a DB
   let razas = await Raza.findAll({
-    attributes: ["name", "id", "weight", "life_span"],
+    attributes: ["name", "id", "weight", "life_span", "url"],
     include: {
       model: Temperamento,
       attributes: ["name"],
@@ -40,7 +40,7 @@ async function obtenerRazasOrdenar() {
 
   //solicitud a DB
   let razas = await Raza.findAll({
-    attributes: ["name", "id", "weight", "life_span"],
+    attributes: ["name", "id", "weight", "life_span", "url"],
     include: {
       model: Temperamento,
       attributes: ["name"],
@@ -72,7 +72,7 @@ async function obtenerDetalleDeRazas() {
 
   //solicitud a DB
   let razas = await Raza.findAll({
-    attributes: ["name", "id", "weight", "life_span", "height"],
+    attributes: ["name", "id", "weight", "life_span", "height", "url"],
     include: {
       model: Temperamento,
       attributes: ["name"],
