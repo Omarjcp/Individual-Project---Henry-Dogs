@@ -19,7 +19,9 @@ export const Raza = ({ razas }) => {
             <NombreRaza>{raza.name}</NombreRaza>
 
             <Img
-              src={raza.image ? raza.image : raza.url}
+              src={
+                raza.image || raza.url ? raza.image || raza.url : ImagenAvatar
+              }
               alt={`Imagen de un ${raza.name}`}
             />
 

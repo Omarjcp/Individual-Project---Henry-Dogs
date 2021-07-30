@@ -8,6 +8,7 @@ export const OBTENER_POR_PAG = "OBTENER_POR_PAG";
 export const OBTENER_POR_NOMBRE = "OBTENER_POR_NOMBRE";
 export const OBTENER_PARA_ORDENAR = "OBTENER_PARA_ORDENAR";
 export const CREAR_RAZA = "CREAR_RAZA";
+export const CREAR_TEMPERAMENTO = "CREAR_TEMPERAMENTO";
 
 export function obtenerRazas() {
   return async function (dispatch) {
@@ -129,6 +130,20 @@ export function crearRaza(payload) {
     try {
       const { data } = await axios.post("http://localhost:3001/dog", payload);
       return dispatch({ type: CREAR_RAZA, payload: data });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+
+export function crearTemperamento(payload) {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.post(
+        "http://localhost:3001/dog/crearTemperamento",
+        payload
+      );
+      return dispatch({ type: CREAR_TEMPERAMENTO, payload: data });
     } catch (err) {
       console.log(err);
     }

@@ -1,9 +1,8 @@
-import { DivContainer } from "./styled";
 import { Link } from "react-router-dom";
 
-export const Barra = () => {
+export const Barra = ({ DivCont }) => {
   return (
-    <DivContainer>
+    <DivCont>
       <div style={{ marginTop: "2rem" }}>
         <a
           href="http://localhost:3000/principal"
@@ -23,6 +22,6 @@ export const Barra = () => {
           </svg>
         </a>
       </div>
-    </DivContainer>
+    </DivCont>
   );
 };

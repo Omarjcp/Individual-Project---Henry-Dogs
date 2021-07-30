@@ -64,6 +64,7 @@ export const Navbar = ({ setPagina }) => {
           <div style={{ marginLeft: "2rem" }}>
             <Linknavbar onClick={regresar}>Inicio</Linknavbar>
             <Linknav to="/crear-raza">Crear Raza</Linknav>
+            <Linknav to="/crear-temperamento">Crear Temperamento</Linknav>
           </div>
         </div>
 

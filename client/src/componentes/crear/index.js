@@ -4,6 +4,7 @@ import { schema } from "./validaciones/validaciones";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Barra } from "./barra/index";
+import { DivCont } from "./barra/styled";
 import {
   DivContainer,
   DivInput,
@@ -13,6 +14,7 @@ import {
   DivInputMinMax,
   InputN,
   InputSubmit,
+  InputImg,
 } from "./styled";
 import { crearRaza, obtenerTemperamentos } from "../../redux/actions";
 import { useEffect } from "react";
@@ -37,19 +39,18 @@ export const NuevaRaza = () => {
 
   const onSubmit = (data) => {
     dispatch(crearRaza(data));
-    console.log(data);
   };
 
-  // useEffect(() => {
-  //   if (msg) {
-  //     alert(msg);
-  //     history.go(0);
-  //   }
-  // }, [msg]);
+  useEffect(() => {
+    if (msg) {
+      alert(msg);
+      history.go(0);
+    }
+  }, [msg]);
 
   return (
     <>
-      <Barra />
+      <Barra DivCont={DivCont} />
 
       <div
         style={{
@@ -167,8 +168,7 @@ export const NuevaRaza = () => {
               <label htmlFor="url">Imagen</label>
               <DivInputMinMax>
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <span>min</span>
-                  <InputMin
+                  <InputImg
                     name="url"
                     id="url"
                     placeholder="url imagen"

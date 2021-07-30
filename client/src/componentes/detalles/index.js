@@ -21,6 +21,12 @@ export const Detalle = () => {
     if (idState == id) setLoading(false);
   }, [idState]);
 
+  const cambioImagen = () => {
+    if (razaId.image) return razaId.image;
+    else if (razaId.url) return razaId.url;
+    else return AvatarImagen;
+  };
+
   return (
     <Contenedor>
       <Navbar />
@@ -32,7 +38,7 @@ export const Detalle = () => {
           <h3 style={{ margin: "10px" }}>{razaId.name}</h3>
           <div style={{ width: "13rem", height: "12rem" }}>
             <img
-              src={`${razaId.image ? razaId.image : razaId.url}`}
+              src={cambioImagen()}
               alt={`imagen de un ${razaId.name}`}
               style={{
                 height: "100%",

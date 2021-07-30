@@ -7,6 +7,7 @@ import {
   OBTENER_PARA_ORDENAR,
   OBTENER_POR_TEMPERAMENTO,
   CREAR_RAZA,
+  CREAR_TEMPERAMENTO,
 } from "../actions/index";
 
 const estadoInicial = {
@@ -21,6 +22,12 @@ const estadoInicial = {
 
 export default function rootReducer(state = estadoInicial, action) {
   switch (action.type) {
+    case CREAR_TEMPERAMENTO:
+      return {
+        ...state,
+        msg: action.payload.message,
+      };
+
     case CREAR_RAZA:
       return {
         ...state,

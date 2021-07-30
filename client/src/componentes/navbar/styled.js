@@ -14,7 +14,6 @@ export const Linknav = styled(Link)`
   padding: 0.4rem;
   &:hover {
     color: #9681ff;
-    font-size: 1.18rem;
     text-shadow: 1px 1px 1px black;
   }
 `;
@@ -29,7 +28,6 @@ export const Linknavbar = styled.button`
   padding: 0.4rem;
   &:hover {
     color: #9681ff;
-    font-size: 1.18rem;
     text-shadow: 1px 1px 1px black;
     cursor: pointer;
   }

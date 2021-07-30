@@ -40,3 +40,11 @@ export const schema = yup.object().shape({
     .required("*Este campo es requerido")
     .matches(unNumero, "*Debe ser un numero"),
 });
+
+export const schemaTemp = yup.object().shape({
+  temp: yup
+    .string()
+    .required("*Este campo es requerido")
+    .min(3, "*Deben ser mas de 2 letras")
+    .matches(soloLetras, "*Debe ser solo letras"),
+});
