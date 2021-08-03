@@ -1,13 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 export const Barra = ({ DivCont }) => {
+  const history = useHistory();
+
+  let regresar = () => {
+    history.push("/principal");
+  };
+
   return (
     <DivCont>
       <div style={{ marginTop: "2rem" }}>
-        <a
-          href="http://localhost:3000/principal"
-          style={{ marginLeft: "1rem" }}
-        >
+        <a href={regresar} style={{ marginLeft: "1rem" }}>
           <svg
             width="34"
             height="34"
