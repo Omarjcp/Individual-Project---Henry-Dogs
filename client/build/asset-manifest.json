@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e2422840.chunk.css",
+    "main.js": "/static/js/main.e6449877.chunk.js",
+    "main.js.map": "/static/js/main.e6449877.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.336290ce.js",
+    "runtime-main.js.map": "/static/js/runtime-main.336290ce.js.map",
+    "static/js/2.08edfc65.chunk.js": "/static/js/2.08edfc65.chunk.js",
+    "static/js/2.08edfc65.chunk.js.map": "/static/js/2.08edfc65.chunk.js.map",
+    "static/js/3.4282ddad.chunk.js": "/static/js/3.4282ddad.chunk.js",
+    "static/js/3.4282ddad.chunk.js.map": "/static/js/3.4282ddad.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.e2422840.chunk.css.map": "/static/css/main.e2422840.chunk.css.map",
+    "static/js/2.08edfc65.chunk.js.LICENSE.txt": "/static/js/2.08edfc65.chunk.js.LICENSE.txt",
+    "static/media/BannerDogs.7df00a97.jpg": "/static/media/BannerDogs.7df00a97.jpg",
+    "static/media/avatarPerro.9cebcf8f.png": "/static/media/avatarPerro.9cebcf8f.png",
+    "static/media/bannerDogs.e5d12712.jpg": "/static/media/bannerDogs.e5d12712.jpg",
+    "static/media/fondo.2c11174b.jpg": "/static/media/fondo.2c11174b.jpg",
+    "static/media/imagenFondo.e1443f6f.jpg": "/static/media/imagenFondo.e1443f6f.jpg",
+    "static/media/wallpapersDog.283ade76.jpg": "/static/media/wallpapersDog.283ade76.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.336290ce.js",
+    "static/js/2.08edfc65.chunk.js",
+    "static/css/main.e2422840.chunk.css",
+    "static/js/main.e6449877.chunk.js"
+  ]
+}

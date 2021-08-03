@@ -10,7 +10,7 @@ export const Barra = ({ DivCont }) => {
   return (
     <DivCont>
       <div style={{ marginTop: "2rem" }}>
-        <a href={regresar} style={{ marginLeft: "1rem" }}>
+        <p onClick={regresar} style={{ marginLeft: "1rem", cursor: "grab" }}>
           <svg
             width="34"
             height="34"
@@ -23,7 +23,7 @@ export const Barra = ({ DivCont }) => {
               fill="#9681ff"
             />
           </svg>
-        </a>
+        </p>
       </div>
     </DivCont>
   );
