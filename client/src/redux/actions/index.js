@@ -13,7 +13,7 @@ export const CREAR_TEMPERAMENTO = "CREAR_TEMPERAMENTO";
 export function obtenerRazas() {
   return async function (dispatch) {
     try {
-      const { data } = await axios("http://localhost:3001/dogs");
+      const { data } = await axios("https://node-dogs-app.herokuapp.com/dogs");
       return dispatch({ type: OBTENER_RAZAS, payload: data });
     } catch (err) {
       console.log(err);
@@ -24,7 +24,9 @@ export function obtenerRazas() {
 export function obtenerPorPag(pag) {
   return async function (dispatch) {
     try {
-      const { data } = await axios("http://localhost:3001/dogs?pag=" + pag);
+      const { data } = await axios(
+        "https://node-dogs-app.herokuapp.com/dogs?pag=" + pag
+      );
       return dispatch({ type: OBTENER_POR_PAG, payload: data });
     } catch (err) {
       console.log(err);
@@ -35,7 +37,9 @@ export function obtenerPorPag(pag) {
 export function obtenerPorId(id) {
   return async function (dispatch) {
     try {
-      const { data } = await axios("http://localhost:3001/dogs/" + id);
+      const { data } = await axios(
+        "https://node-dogs-app.herokuapp.com/dogs/" + id
+      );
       return dispatch({ type: OBTENER_POR_ID, payload: data });
     } catch (err) {
       console.log(err);
@@ -46,7 +50,9 @@ export function obtenerPorId(id) {
 export function obtenerTemperamentos() {
   return async function (dispatch) {
     try {
-      const { data } = await axios("http://localhost:3001/temperament");
+      const { data } = await axios(
+        "https://node-dogs-app.herokuapp.com/temperament"
+      );
       return dispatch({ type: OBTENER_TEMPERAMENTOS, payload: data });
     } catch (err) {
       console.log(err);
@@ -59,7 +65,7 @@ export function obtenerPorTemperamento(payload) {
     try {
       if (payload.orden) {
         const { data } = await axios(
-          "http://localhost:3001/dogs/temp?temper=" +
+          "https://node-dogs-app.herokuapp.com/dogs/temp?temper=" +
             payload.temperamento +
             "&pag=" +
             payload.pag +
@@ -69,7 +75,7 @@ export function obtenerPorTemperamento(payload) {
         return dispatch({ type: OBTENER_POR_TEMPERAMENTO, payload: data });
       } else {
         const { data } = await axios(
-          "http://localhost:3001/dogs/temp?temper=" +
+          "https://node-dogs-app.herokuapp.com/dogs/temp?temper=" +
             payload.temperamento +
             "&pag=" +
             payload.pag
@@ -87,7 +93,7 @@ export function obtenerPorNombre(payload) {
     try {
       if (payload.orden) {
         const { data } = await axios(
-          "http://localhost:3001/dogs?orden=" +
+          "https://node-dogs-app.herokuapp.com/dogs?orden=" +
             payload.orden +
             "&name=" +
             payload.nombre +
@@ -98,7 +104,7 @@ export function obtenerPorNombre(payload) {
         return dispatch({ type: OBTENER_POR_NOMBRE, payload: data });
       } else {
         const { data } = await axios(
-          "http://localhost:3001/dogs?name=" +
+          "https://node-dogs-app.herokuapp.com/dogs?name=" +
             payload.nombre +
             "&pag=" +
             payload.pagina
@@ -116,7 +122,10 @@ export function obtenerParaOrdenar(orden, pag) {
   return async function (dispatch) {
     try {
       const { data } = await axios(
-        "http://localhost:3001/dogs/orden?orden=" + orden + "&pag=" + pag
+        "https://node-dogs-app.herokuapp.com/dogs/orden?orden=" +
+          orden +
+          "&pag=" +
+          pag
       );
       return dispatch({ type: OBTENER_PARA_ORDENAR, payload: data });
     } catch (err) {
@@ -128,7 +137,10 @@ export function obtenerParaOrdenar(orden, pag) {
 export function crearRaza(payload) {
   return async function (dispatch) {
     try {
-      const { data } = await axios.post("http://localhost:3001/dog", payload);
+      const { data } = await axios.post(
+        "https://node-dogs-app.herokuapp.com/dog",
+        payload
+      );
       return dispatch({ type: CREAR_RAZA, payload: data });
     } catch (err) {
       console.log(err);
@@ -140,7 +152,7 @@ export function crearTemperamento(payload) {
   return async function (dispatch) {
     try {
       const { data } = await axios.post(
-        "http://localhost:3001/dog/crearTemperamento",
+        "https://node-dogs-app.herokuapp.com/dog/crearTemperamento",
         payload
       );
       return dispatch({ type: CREAR_TEMPERAMENTO, payload: data });
